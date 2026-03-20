@@ -1,1 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daasa — AI-Powered Content Studio, Bengaluru</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;600;700&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#07070A;--bg2:#0D0D12;--bg3:#12121A;--sf:#1A1A26;--brd:rgba(255,255,255,0.07);--or:#FF4D00;--or2:#FF6B2B;--cy:#00E5FF;--ye:#FFE500;--wh:#F0EEF8;--mu:#5A5870}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--wh);font-family:'Inter',sans-serif;font-weight:300;overflow-x:hidden;cursor:none}
+.cur{position:fixed;width:12px;height:12px;background:var(--or);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);mix-blend-mode:screen;transition:width .2s,height .2s}
+.cur-ring{position:fixed;width:36px;height:36px;border:1px solid rgba(255,77,0,.5);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .3s,height .3s}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1.2rem 5rem;border-bottom:1px solid var(--brd);background:rgba(7,7,10,.94);backdrop-filter:blur(20px);transition:padding .3s}
+.logo{font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:.1em;color:var(--wh);text-decoration:none;position:relative}
+.logo::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--or)}
+.logo span{color:var(--or)}
+.nav-links{display:flex;gap:1.8rem;list-style:none;align-items:center}
+.nav-links a{font-family:'Rajdhani',sans-serif;font-size:.85rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mu);text-decoration:none;transition:color .2s;position:relative}
+.nav-links a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:1px;background:var(--or);transition:width .2s}
+.nav-links a:hover{color:var(--wh)}.nav-links a:hover::after{width:100%}
+.nav-links a.active{color:var(--or)}.nav-links a.active::after{width:100%}
+.nav-cta{background:var(--or)!important;color:#fff!important;padding:.5rem 1.4rem!important;clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);font-weight:700!important}
+.nav-cta::after{display:none!important}
+/* HERO */
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:8rem 5rem 5rem;position:relative;overflow:hidden;gap:3rem}
+.hero-glow{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 50% 70% at 68% 50%,rgba(255,77,0,.08) 0%,transparent 70%),radial-gradient(ellipse 30% 40% at 22% 20%,rgba(0,229,255,.04) 0%,transparent 60%)}
+.hero-tag{display:inline-flex;align-items:center;gap:.5rem;background:rgba(255,77,0,.12);border:1px solid rgba(255,77,0,.3);padding:.4rem 1rem;font-family:'Rajdhani',sans-serif;font-size:.75rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--or);margin-bottom:2rem;clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%);opacity:0;animation:sli .6s ease .1s forwards}
+.hero-tag::before{content:'▶';font-size:.5rem}
+.hero-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(3.8rem,8vw,7.5rem);line-height:.9;letter-spacing:.02em;margin-bottom:1.5rem;opacity:0;animation:sli .6s ease .25s forwards}
+.t1{display:block;color:var(--wh)}.t2{display:block;color:transparent;-webkit-text-stroke:2px var(--or)}.t3{display:block;color:var(--or)}
+.hero-desc{font-size:.93rem;line-height:1.85;color:rgba(240,238,248,.5);max-width:480px;margin-bottom:2.5rem;opacity:0;animation:sli .6s ease .4s forwards}
+.hero-acts{display:flex;gap:1rem;flex-wrap:wrap;opacity:0;animation:sli .6s ease .55s forwards}
+.hero-right{display:flex;justify-content:center;align-items:center;opacity:0;animation:sliR .8s ease .4s forwards}
+.hero-svg{width:100%;max-width:520px;filter:drop-shadow(0 0 40px rgba(255,77,0,.18));animation:flt 4s ease-in-out infinite}
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 2rem;font-family:'Rajdhani',sans-serif;font-size:.88rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;cursor:none;transition:all .2s;border:none}
+.btn-f{background:var(--or);color:#fff;clip-path:polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%)}
+.btn-f:hover{background:var(--or2);transform:translateY(-2px)}
+.btn-g{background:transparent;color:rgba(240,238,248,.6);border:1px solid var(--brd);clip-path:polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%)}
+.btn-g:hover{border-color:var(--or);color:var(--or)}
+/* STATS */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--brd);border-bottom:1px solid var(--brd)}
+.st{padding:2.2rem 3rem;border-right:1px solid var(--brd);transition:background .3s}
+.st:hover{background:var(--bg3)}.st:last-child{border-right:none}
+.st-n{font-family:'Bebas Neue',sans-serif;font-size:3rem;letter-spacing:.05em;color:var(--or);line-height:1;margin-bottom:.3rem}
+.st-l{font-family:'Rajdhani',sans-serif;font-size:.78rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--mu)}
+/* SERVICES PREVIEW */
+#services-prev{background:var(--bg2)}
+.sp-top{display:grid;grid-template-columns:1fr 1fr;gap:4rem;margin-bottom:4rem;align-items:end}
+.sp-top p{font-size:.88rem;line-height:1.9;color:rgba(240,238,248,.45)}
+section{padding:6rem 5rem;position:relative}
+.lbl{font-family:'Rajdhani',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.25em;text-transform:uppercase;color:var(--or);margin-bottom:.8rem;display:flex;align-items:center;gap:.5rem}
+.lbl::before{content:'//';opacity:.5}
+.stit{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.2rem,4vw,3.6rem);letter-spacing:.03em;line-height:1;margin-bottom:1.5rem}
+.sgrid{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--brd)}
+.sc{padding:2rem 1.8rem;border-right:1px solid var(--brd);border-bottom:1px solid var(--brd);transition:background .25s;position:relative;overflow:hidden}
+.sc::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--or);transform:scaleX(0);transform-origin:left;transition:transform .3s}
+.sc:hover{background:var(--sf)}.sc:hover::after{transform:scaleX(1)}
+.sc:nth-child(4n){border-right:none}.sc:nth-child(n+5){border-bottom:none}
+.sc-svg{width:100%;height:100px;margin-bottom:1.2rem}
+.sc-n{font-family:'Rajdhani',sans-serif;font-size:.92rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;margin-bottom:.35rem}
+.sc-d{font-size:.72rem;color:var(--mu);line-height:1.72}
+/* WHY SECTION */
+#why{background:var(--bg);display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:center}
+.why-svg-wrap{display:flex;justify-content:center}.why-svg{width:100%;max-width:420px}
+.wlist{display:flex;flex-direction:column}
+.wi{padding:1.8rem 0;border-bottom:1px solid var(--brd);display:grid;grid-template-columns:2.5rem 1fr;gap:1rem;transition:padding-left .2s}
+.wi:hover{padding-left:1rem}.wi:last-child{border-bottom:none}
+.wi-n{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;color:var(--or);opacity:.6;padding-top:.1rem}
+.wi-t{font-family:'Rajdhani',sans-serif;font-size:.92rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;margin-bottom:.35rem}
+.wi-d{font-size:.74rem;color:var(--mu);line-height:1.72}
+/* CTA BANNER */
+#cta-band{background:var(--or);padding:5rem;display:flex;justify-content:space-between;align-items:center;gap:2rem}
+.cta-band-t{font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,4vw,3.5rem);letter-spacing:.03em;line-height:1;color:#fff}
+.btn-dark{background:#fff;color:var(--or);clip-path:polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%)}
+.btn-dark:hover{background:#f0efe8;transform:translateY(-2px)}
+/* FOOTER */
+footer{background:#040406;padding:2.2rem 5rem;display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--brd)}
+.fl{display:flex;flex-direction:column;gap:.4rem}
+.ftt{font-family:'Rajdhani',sans-serif;font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--mu)}
+.flinks{display:flex;gap:2rem;list-style:none}
+.flinks a{font-family:'Rajdhani',sans-serif;font-size:.76rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--mu);text-decoration:none;transition:color .2s}
+.flinks a:hover{color:var(--or)}
+@keyframes sli{from{opacity:0;transform:translateX(-30px)}to{opacity:1;transform:translateX(0)}}
+@keyframes sliR{from{opacity:0;transform:translateX(40px)}to{opacity:1;transform:translateX(0)}}
+@keyframes flt{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+.rv{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}.rv.vs{opacity:1;transform:none}
+@media(max-width:1100px){nav{padding:1rem 1.5rem}.nav-links{display:none}section{padding:4rem 1.5rem}.hero{grid-template-columns:1fr;padding:8rem 1.5rem 4rem}.hero-right{display:none}.stats,.sgrid{grid-template-columns:1fr 1fr}.st,.sc{border-right:none!important}.sp-top{grid-template-columns:1fr}#why{grid-template-columns:1fr}.why-svg-wrap{display:none}#cta-band{flex-direction:column;padding:3rem 1.5rem}footer{flex-direction:column;gap:1.5rem;text-align:center}.flinks{justify-content:center}}
+</style>
+</head>
+<body>
+<div class="cur" id="cur"></div><div class="cur-ring" id="ring"></div>
+<nav>
+  <a class="logo" href="index.html"><span>D</span>AASA</a>
+  <ul class="nav-links">
+    <li><a href="index.html" class="active">Home</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="pricing.html">Pricing</a></li>
+    <li><a href="portfolio.html">Portfolio</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html" class="nav-cta">Contact Us ▶</a></li>
+  </ul>
+</nav>
 
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div>
+    <div class="hero-tag">Bengaluru · AI Studio · Est. 2026</div>
+    <h1 class="hero-title"><span class="t1">YOUR CONTENT</span><span class="t2">UNLEASHED</span><span class="t3">BY AI.</span></h1>
+    <p class="hero-desc">Daasa is Bengaluru's full-stack content studio — scripting, shooting, editing, social media, websites. Powered by AI. Built for creators, brands, and broadcasters across South India.</p>
+    <div class="hero-acts">
+      <a href="services.html" class="btn btn-f">Our Services ▶</a>
+      <a href="pricing.html" class="btn btn-g">View Pricing</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <svg class="hero-svg" viewBox="0 0 520 480" fill="none">
+      <g opacity="0.05" stroke="white" stroke-width="1.5"><line x1="260" y1="240" x2="0" y2="0"/><line x1="260" y1="240" x2="130" y2="0"/><line x1="260" y1="240" x2="260" y2="0"/><line x1="260" y1="240" x2="390" y2="0"/><line x1="260" y1="240" x2="520" y2="0"/><line x1="260" y1="240" x2="0" y2="480"/><line x1="260" y1="240" x2="260" y2="480"/><line x1="260" y1="240" x2="520" y2="480"/></g>
+      <ellipse cx="260" cy="395" rx="160" ry="40" fill="rgba(255,77,0,0.1)"/>
+      <rect x="120" y="185" width="280" height="175" rx="10" fill="#12121A" stroke="#FF4D00" stroke-width="2.5"/>
+      <rect x="133" y="197" width="254" height="150" rx="5" fill="#060610"/>
+      <polyline points="148,272 166,248 184,278 202,244 220,268 238,244 256,272 274,255 292,270 310,248 328,265 346,280 364,252 382,268" stroke="#FF4D00" stroke-width="2.5" fill="none"/>
+      <polyline points="148,285 166,262 184,292 202,257 220,282 238,257 256,285 274,268 292,283 310,261 328,278 346,293 364,266 382,280" stroke="#00E5FF" stroke-width="1.5" fill="none" opacity="0.35"/>
+      <rect x="152" y="314" width="70" height="7" rx="3" fill="#FF4D00" opacity="0.55"/>
+      <rect x="230" y="314" width="50" height="7" rx="3" fill="#2A2A3A" opacity="0.6"/>
+      <rect x="244" y="360" width="32" height="28" rx="3" fill="#1A1A26"/>
+      <rect x="215" y="386" width="90" height="10" rx="5" fill="#1A1A26"/>
+      <rect x="90" y="394" width="340" height="14" rx="5" fill="#1A1A26" stroke="#2A2A3A"/>
+      <rect x="222" y="318" width="76" height="80" rx="8" fill="#1A1A26" stroke="#2A2A3A"/>
+      <rect x="230" y="338" width="60" height="60" rx="8" fill="#FF4D00"/>
+      <line x1="260" y1="340" x2="260" y2="395" stroke="#CC3000" stroke-width="2"/>
+      <path d="M230 352 Q198 362 186 378" stroke="#FF4D00" stroke-width="20" stroke-linecap="round" fill="none"/>
+      <path d="M290 352 Q322 362 334 378" stroke="#FF4D00" stroke-width="20" stroke-linecap="round" fill="none"/>
+      <ellipse cx="184" cy="382" rx="12" ry="9" fill="#FFCBA4"/>
+      <ellipse cx="336" cy="382" rx="12" ry="9" fill="#FFCBA4"/>
+      <ellipse cx="260" cy="298" rx="36" ry="38" fill="#FFCBA4"/>
+      <path d="M224 286 Q228 252 244 258 Q238 242 255 250 Q252 234 265 244 Q270 228 280 240 Q288 228 292 246 Q304 242 297 264" fill="#180A2E"/>
+      <path d="M224 292 Q212 304 216 318" stroke="#180A2E" stroke-width="7" stroke-linecap="round" fill="none"/>
+      <path d="M296 292 Q308 304 304 318" stroke="#180A2E" stroke-width="7" stroke-linecap="round" fill="none"/>
+      <ellipse cx="246" cy="300" rx="10" ry="12" fill="white"/>
+      <ellipse cx="274" cy="300" rx="10" ry="12" fill="white"/>
+      <ellipse cx="247" cy="301" rx="6.5" ry="8.5" fill="#180A2E"/>
+      <ellipse cx="275" cy="301" rx="6.5" ry="8.5" fill="#180A2E"/>
+      <ellipse cx="250" cy="296" rx="2.5" ry="3" fill="white"/>
+      <ellipse cx="278" cy="296" rx="2.5" ry="3" fill="white"/>
+      <path d="M236 287 Q246 282 256 286" stroke="#180A2E" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <path d="M264 286 Q274 282 284 287" stroke="#180A2E" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <path d="M251 313 Q260 320 269 313" stroke="#CC8866" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <path d="M224 290 Q224 264 260 262 Q296 264 296 290" stroke="#1E1E2E" stroke-width="8" fill="none" stroke-linecap="round"/>
+      <rect x="216" y="287" width="14" height="20" rx="6" fill="#1E1E2E" stroke="#FF4D00" stroke-width="1.5"/>
+      <rect x="290" y="287" width="14" height="20" rx="6" fill="#1E1E2E" stroke="#FF4D00" stroke-width="1.5"/>
+      <polygon points="378,152 383,166 393,161 386,173 390,187 381,180 372,187 376,173 369,161 378,166" fill="#FFE500" opacity="0.9" stroke="#FF8800" stroke-width="1"/>
+      <polygon points="425,198 428,208 436,205 431,213 434,223 427,218 420,223 423,213 418,205 425,208" fill="#00E5FF" opacity="0.75"/>
+      <polygon points="136,162 139,172 147,169 142,178 145,188 138,183 131,188 134,178 129,169 136,172" fill="#FF4D00" opacity="0.65"/>
+      <rect x="350" y="210" width="125" height="44" rx="7" fill="#1A1A26" stroke="#FF4D00" stroke-width="1"/>
+      <text x="364" y="224" font-size="8" fill="#FF4D00" font-family="monospace" font-weight="bold">// DAASA AI</text>
+      <text x="364" y="240" font-size="9" fill="rgba(240,238,248,0.7)" font-family="monospace">Rendering... 94%</text>
+      <rect x="364" y="246" width="84" height="3" rx="2" fill="#2A2A3A"/>
+      <rect x="364" y="246" width="78" height="3" rx="2" fill="#FF4D00"/>
+      <rect x="48" y="172" width="106" height="34" rx="5" fill="rgba(0,229,255,0.1)" stroke="#00E5FF" stroke-width="1"/>
+      <text x="64" y="194" font-size="11" fill="#00E5FF" font-family="monospace" font-weight="bold">KANNADA ✓</text>
+    </svg>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats rv">
+  <div class="st"><div class="st-n">8+</div><div class="st-l">Services Under One Roof</div></div>
+  <div class="st"><div class="st-n">3</div><div class="st-l">Languages — KN · TA · TE</div></div>
+  <div class="st"><div class="st-n">5–7</div><div class="st-l">Day Broadcast Delivery</div></div>
+  <div class="st"><div class="st-n">40%</div><div class="st-l">Lower Cost Than In-House</div></div>
+</div>
+
+<!-- SERVICES PREVIEW -->
+<section id="services-prev">
+  <div class="sp-top rv">
+    <div><p class="lbl">What We Do</p><h2 class="stit">EVERY SERVICE YOUR CONTENT NEEDS.</h2></div>
+    <p>From the first idea to a published, performing piece. All services available individually or as a monthly subscription.</p>
+  </div>
+  <div class="sgrid rv">
+    <div class="sc"><svg class="sc-svg" viewBox="0 0 200 100" fill="none"><rect x="18" y="8" width="164" height="84" rx="6" fill="#12121A" stroke="#2A2A3A"/><rect x="30" y="20" width="82" height="6" rx="3" fill="#FF4D00" opacity="0.7"/><rect x="30" y="32" width="140" height="4" rx="2" fill="#2A2A3A"/><rect x="30" y="42" width="112" height="4" rx="2" fill="#2A2A3A"/><rect x="30" y="52" width="134" height="4" rx="2" fill="#2A2A3A"/><rect x="122" y="58" width="7" height="11" rx="1" fill="#FF4D00"><animate attributeName="opacity" values="1;0;1" dur="1s" repeatCount="indefinite"/></rect><rect x="128" y="15" width="44" height="20" rx="4" fill="rgba(255,77,0,0.14)" stroke="#FF4D00" stroke-width="1"/><text x="138" y="29" font-size="9" fill="#FF4D00" font-family="monospace" font-weight="bold">AI ⚡</text></svg><div class="sc-n">Scripting &amp; Ideation</div><div class="sc-d">AI-assisted scripts, story concepts, and social copy.</div></div>
+    <div class="sc"><svg class="sc-svg" viewBox="0 0 200 100" fill="none"><rect x="48" y="18" width="104" height="68" rx="8" fill="#1A1A26" stroke="#FF4D00" stroke-width="1.5"/><circle cx="100" cy="52" r="24" fill="#0A0A10" stroke="#FF4D00" stroke-width="2"/><circle cx="100" cy="52" r="16" fill="#141420" stroke="#2A2A3A"/><circle cx="100" cy="52" r="8" fill="#FF4D00" opacity="0.25"/><circle cx="100" cy="52" r="4" fill="#FF4D00" opacity="0.85"/><circle cx="62" cy="27" r="5" fill="#FF4D00"><animate attributeName="opacity" values="1;0.15;1" dur="1.4s" repeatCount="indefinite"/></circle><text x="70" y="31" font-size="7" fill="#FF4D00" font-family="monospace" font-weight="bold">REC</text></svg><div class="sc-n">Video Production</div><div class="sc-d">Professional cameras, lighting, on-location crew.</div></div>
+    <div class="sc"><svg class="sc-svg" viewBox="0 0 200 100" fill="none"><rect x="12" y="10" width="176" height="80" rx="6" fill="#0C0C14" stroke="#2A2A3A"/><rect x="22" y="28" width="156" height="12" rx="2" fill="#1A1A26"/><rect x="22" y="28" width="84" height="12" rx="2" fill="rgba(255,77,0,0.4)"/><rect x="22" y="46" width="156" height="12" rx="2" fill="#1A1A26"/><rect x="22" y="46" width="116" height="12" rx="2" fill="rgba(0,229,255,0.28)"/><line x1="118" y1="18" x2="118" y2="86" stroke="#FF4D00" stroke-width="1.5"/><polygon points="111,18 118,11 125,18" fill="#FF4D00"/><rect x="140" y="72" width="38" height="14" rx="3" fill="rgba(255,77,0,0.14)" stroke="#FF4D00" stroke-width="0.8"/><text x="148" y="82" font-size="7" fill="#FF4D00" font-family="monospace" font-weight="bold">AI CUT</text></svg><div class="sc-n">Post-Production</div><div class="sc-d">Editing, colour grading, motion graphics &amp; sound.</div></div>
+    <div class="sc"><svg class="sc-svg" viewBox="0 0 200 100" fill="none"><rect x="70" y="5" width="60" height="90" rx="10" fill="#1A1A26" stroke="#FF4D00" stroke-width="1.5"/><rect x="76" y="15" width="48" height="66" rx="4" fill="#080810"/><rect x="80" y="20" width="40" height="20" rx="3" fill="#FF4D00" opacity="0.28"/><polygon points="95,25 95,34 105,30" fill="#FF4D00" opacity="0.85"/><text x="80" y="57" font-size="7" fill="#FF4D00" font-family="monospace" font-weight="bold">↑ 48K</text><text x="106" y="57" font-size="7" fill="#00E5FF" font-family="monospace">♥ 12K</text></svg><div class="sc-n">Social Media</div><div class="sc-d">Strategy, scheduling, community management.</div></div>
+    <div class="sc"><svg class="sc-svg" viewBox="0 0 200 100" fill="none"><rect x="12" y="8" width="92" height="50" rx="8" fill="#1A1A26" stroke="#FF4D00" stroke-width="1.5"/><polygon points="28,58 22,72 44,58" fill="#1A1A26" stroke="#FF4D00" stroke-width="1.5"/><text x="26" y="30" font-size="11" fill="rgba(240,238,248,0.85)" font-family="serif">ಕನ್ನಡ</text><text x="26" y="48" font-size="7" fill="#FF4D00" font-family="monospace" font-weight="bold">KANNADA</text><rect x="96" y="48" width="90" height="40" rx="8" fill="#1A1A26" stroke="#00E5FF" stroke-width="1.5"/><text x="108" y="64" font-size="10" fill="rgba(240,238,248,0.7)" font-family="serif">தமிழ்</text><text x="108" y="80" font-size="7" fill="#00E5FF" font-family="monospace" font-weight="bold">TAMIL</text></svg><div class="sc-n">Vernacular Content</div><div class="sc-d">Kannada, Tamil, Telugu — native production.</div></div>
+    <div class="sc"><svg class="sc-svg" viewBox="0 0 200 100" fill="none"><rect x="18" y="8" width="164" height="84" rx="6" fill="#0C0C14" stroke="#2A2A3A"/><rect x="18" y="8" width="164" height="20" rx="6" fill="#1A1A26"/><rect x="18" y="20" width="164" height="8" fill="#1A1A26"/><circle cx="32" cy="18" r="3.5" fill="#FF4D00" opacity="0.6"/><circle cx="44" cy="18" r="3.5" fill="#FFE500" opacity="0.6"/><circle cx="56" cy="18" r="3.5" fill="#00E5FF" opacity="0.4"/><rect x="72" y="13" width="80" height="9" rx="3" fill="#0C0C14"/><text x="78" y="20" font-size="6" fill="#3A3A5A" font-family="monospace">daasa.in</text><rect x="28" y="36" width="60" height="8" rx="2" fill="#FF4D00" opacity="0.7"/><rect x="28" y="72" width="40" height="13" rx="3" fill="#FF4D00" opacity="0.8"/></svg><div class="sc-n">Website Development</div><div class="sc-d">Websites, landing pages — built and optimised.</div></div>
+    <div class="sc"><svg class="sc-svg" viewBox="0 0 200 100" fill="none"><circle cx="100" cy="50" r="18" fill="#FF4D00" opacity="0.14" stroke="#FF4D00" stroke-width="2"/><text x="91" y="55" font-size="14" fill="#FF4D00">⚡</text><circle cx="38" cy="22" r="13" fill="#1A1A26" stroke="#2A2A3A"/><text x="32" y="27" font-size="10">🎥</text><circle cx="162" cy="22" r="13" fill="#1A1A26" stroke="#2A2A3A"/><text x="156" y="27" font-size="10">✂️</text><circle cx="26" cy="78" r="13" fill="#1A1A26" stroke="#2A2A3A"/><text x="20" y="83" font-size="10">🎨</text><circle cx="174" cy="78" r="13" fill="#1A1A26" stroke="#2A2A3A"/><text x="168" y="83" font-size="10">🎙️</text><line x1="50" y1="28" x2="84" y2="42" stroke="#FF4D00" stroke-width="1" stroke-dasharray="3,3" opacity="0.4"/><line x1="150" y1="28" x2="116" y2="42" stroke="#FF4D00" stroke-width="1" stroke-dasharray="3,3" opacity="0.4"/></svg><div class="sc-n">Freelancer Network</div><div class="sc-d">Vetted videographers, editors, voice artists.</div></div>
+    <div class="sc"><svg class="sc-svg" viewBox="0 0 200 100" fill="none"><rect x="28" y="10" width="144" height="72" rx="6" fill="#1A1A26" stroke="#FF4D00" stroke-width="2"/><rect x="38" y="18" width="124" height="52" rx="3" fill="#08080E"/><path d="M60 44 Q100 20 140 44" stroke="#FF4D00" stroke-width="2" fill="none" stroke-dasharray="8,4"><animate attributeName="opacity" values="0.8;0.15;0.8" dur="1.2s" repeatCount="indefinite"/></path><path d="M72 52 Q100 34 128 52" stroke="#FF4D00" stroke-width="1.5" fill="none" stroke-dasharray="6,4"><animate attributeName="opacity" values="0.55;0.08;0.55" dur="1.2s" begin="0.3s" repeatCount="indefinite"/></path><rect x="143" y="14" width="28" height="20" rx="3" fill="rgba(255,77,0,0.95)"/><text x="147" y="22" font-size="6" fill="white" font-family="monospace" font-weight="bold">5–7</text><text x="147" y="31" font-size="5" fill="white" font-family="monospace">DAYS</text></svg><div class="sc-n">Broadcast Editing</div><div class="sc-d">TV-ready post-production in 5–7 days.</div></div>
+  </div>
+  <div style="text-align:center;margin-top:3rem" class="rv">
+    <a href="services.html" class="btn btn-f">View All Services ▶</a>
+  </div>
+</section>
+
+<!-- WHY -->
+<section id="why">
+  <div class="why-svg-wrap rv">
+    <svg class="why-svg" viewBox="0 0 420 400" fill="none">
+      <g opacity="0.05" stroke="white" stroke-width="2"><line x1="210" y1="200" x2="0" y2="0"/><line x1="210" y1="200" x2="210" y2="0"/><line x1="210" y1="200" x2="420" y2="0"/><line x1="210" y1="200" x2="0" y2="400"/><line x1="210" y1="200" x2="420" y2="400"/></g>
+      <ellipse cx="210" cy="340" rx="120" ry="25" fill="rgba(255,77,0,0.1)"/>
+      <path d="M192 300 L178 360" stroke="#FF4D00" stroke-width="20" stroke-linecap="round"/>
+      <path d="M228 300 L242 360" stroke="#FF4D00" stroke-width="20" stroke-linecap="round"/>
+      <path d="M168 208 L192 300 L228 300 L252 208 Z" fill="#FF4D00"/>
+      <path d="M168 220 Q115 210 80 192" stroke="#FF4D00" stroke-width="22" stroke-linecap="round" fill="none"/>
+      <path d="M252 220 Q305 210 340 192" stroke="#FF4D00" stroke-width="22" stroke-linecap="round" fill="none"/>
+      <circle cx="76" cy="190" r="17" fill="#FFCBA4" stroke="#FF4D00" stroke-width="2"/>
+      <circle cx="344" cy="190" r="17" fill="#FFCBA4" stroke="#FF4D00" stroke-width="2"/>
+      <polygon points="59,190 18,172 12,190 18,208" fill="#FFE500" opacity="0.88"/>
+      <polygon points="381,190 422,172 428,190 422,208" fill="#00E5FF" opacity="0.88"/>
+      <ellipse cx="210" cy="140" rx="40" ry="44" fill="#FFCBA4"/>
+      <path d="M170 128 Q174 90 190 96 Q185 76 204 84 Q208 68 220 78 Q228 66 232 84 Q246 80 240 102" fill="#2A0A28"/>
+      <ellipse cx="197" cy="138" rx="11" ry="12" fill="white"/>
+      <ellipse cx="223" cy="138" rx="11" ry="12" fill="white"/>
+      <ellipse cx="198" cy="139" rx="7" ry="8" fill="#180A18"/>
+      <ellipse cx="224" cy="139" rx="7" ry="8" fill="#180A18"/>
+      <ellipse cx="201" cy="135" rx="2.8" ry="3.3" fill="white"/>
+      <ellipse cx="227" cy="135" rx="2.8" ry="3.3" fill="white"/>
+      <path d="M186 126 Q197 120 208 125" stroke="#2A0A28" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <path d="M212 125 Q223 120 234 126" stroke="#2A0A28" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <path d="M200 152 Q210 160 220 152" stroke="#CC8866" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+      <polygon points="340,55 344,68 354,63 348,75 352,88 342,80 333,88 337,75 330,63 340,68" fill="#FFE500" opacity="0.72" stroke="#FF8800" stroke-width="1"/>
+      <polygon points="80,72 83,82 91,80 86,89 89,99 82,94 74,99 77,89 72,80 80,82" fill="#00E5FF" opacity="0.65"/>
+    </svg>
+  </div>
+  <div class="rv">
+    <p class="lbl">Why Daasa</p><h2 class="stit">NOT JUST ANOTHER AGENCY.</h2>
+    <div class="wlist">
+      <div class="wi"><div class="wi-n">01</div><div><div class="wi-t">AI-Powered &amp; Affordable</div><div class="wi-d">AI embedded at every step. Premium output at a price creators and brands can actually afford.</div></div></div>
+      <div class="wi"><div class="wi-n">02</div><div><div class="wi-t">Vernacular-First</div><div class="wi-d">600M+ South Indian regional language users — almost entirely ignored by professional studios. Not by us.</div></div></div>
+      <div class="wi"><div class="wi-n">03</div><div><div class="wi-t">One Roof, Zero Juggling</div><div class="wi-d">Scripting, shooting, editing, social, website — one team, one brief, one monthly payment.</div></div></div>
+      <div class="wi"><div class="wi-n">04</div><div><div class="wi-t">Vetted Network</div><div class="wi-d">Every creative evaluated before touching your project. Boutique agility, production house quality.</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<div id="cta-band">
+  <div class="cta-band-t">READY TO BUILD SOMETHING GREAT?</div>
+  <a href="contact.html" class="btn btn-dark">Start Now ▶</a>
+</div>
+
+<footer>
+  <div class="fl">
+    <a class="logo" href="index.html"><span>D</span>AASA</a>
+    <p class="ftt">AI-Powered Vernacular Content Studio · Bengaluru · Est. 2026</p>
+  </div>
+  <ul class="flinks">
+    <li><a href="services.html">Services</a></li><li><a href="pricing.html">Pricing</a></li>
+    <li><a href="portfolio.html">Portfolio</a></li><li><a href="about.html">About</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+</footer>
+
+<script>
+const cur=document.getElementById('cur'),ring=document.getElementById('ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
+(function loop(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(loop);})();
+document.querySelectorAll('a,button').forEach(el=>{el.addEventListener('mouseenter',()=>{cur.style.width='20px';cur.style.height='20px';ring.style.width='54px';ring.style.height='54px';});el.addEventListener('mouseleave',()=>{cur.style.width='12px';cur.style.height='12px';ring.style.width='36px';ring.style.height='36px';});});
+const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('vs');}),{threshold:.08});
+document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
+window.addEventListener('scroll',()=>{document.querySelector('nav').style.padding=window.scrollY>60?'0.8rem 5rem':'1.2rem 5rem';});
+</script>
+</body>
+</html>
