@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio — Daasa Studio</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;600;700&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#07070A;--bg2:#0D0D12;--bg3:#12121A;--sf:#1A1A26;--brd:rgba(255,255,255,0.07);--or:#FF4D00;--or2:#FF6B2B;--cy:#00E5FF;--ye:#FFE500;--wh:#F0EEF8;--mu:#5A5870}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--wh);font-family:'Inter',sans-serif;font-weight:300;overflow-x:hidden;cursor:none}
+.cur{position:fixed;width:12px;height:12px;background:var(--or);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);mix-blend-mode:screen;transition:width .2s,height .2s}
+.cur-ring{position:fixed;width:36px;height:36px;border:1px solid rgba(255,77,0,.5);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .3s,height .3s}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1.2rem 5rem;border-bottom:1px solid var(--brd);background:rgba(7,7,10,.94);backdrop-filter:blur(20px)}
+.logo{font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:.1em;color:var(--wh);text-decoration:none;position:relative}
+.logo::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--or)}
+.logo span{color:var(--or)}
+.nav-links{display:flex;gap:1.8rem;list-style:none;align-items:center}
+.nav-links a{font-family:'Rajdhani',sans-serif;font-size:.85rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mu);text-decoration:none;transition:color .2s;position:relative}
+.nav-links a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:1px;background:var(--or);transition:width .2s}
+.nav-links a:hover{color:var(--wh)}.nav-links a:hover::after{width:100%}
+.nav-links a.active{color:var(--or)}.nav-links a.active::after{width:100%}
+.nav-cta{background:var(--or)!important;color:#fff!important;padding:.5rem 1.4rem!important;clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);font-weight:700!important}
+.nav-cta::after{display:none!important}
+section{padding:6rem 5rem;position:relative}
+.lbl{font-family:'Rajdhani',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.25em;text-transform:uppercase;color:var(--or);margin-bottom:.8rem;display:flex;align-items:center;gap:.5rem}
+.lbl::before{content:'//';opacity:.5}
+.stit{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.2rem,4vw,3.6rem);letter-spacing:.03em;line-height:1;margin-bottom:1.5rem}
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 2rem;font-family:'Rajdhani',sans-serif;font-size:.88rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;cursor:none;transition:all .2s;border:none}
+.btn-f{background:var(--or);color:#fff;clip-path:polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%)}
+.btn-f:hover{background:var(--or2);transform:translateY(-2px)}
+.btn-w{background:#fff;color:var(--or);clip-path:polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%)}
+.btn-w:hover{background:#f0efe8}
+/* HERO */
+.page-hero{padding:10rem 5rem 5rem;position:relative;overflow:hidden;border-bottom:1px solid var(--brd)}
+.page-hero-bg{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 60% 80% at 80% 50%,rgba(255,77,0,.07) 0%,transparent 70%)}
+.ph-tag{display:inline-flex;align-items:center;gap:.5rem;background:rgba(255,77,0,.12);border:1px solid rgba(255,77,0,.3);padding:.4rem 1rem;font-family:'Rajdhani',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--or);margin-bottom:1.5rem;clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%);opacity:0;animation:sli .5s ease .1s forwards}
+.ph-tag::before{content:'//';opacity:.5}
+.ph-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(3.5rem,8vw,7rem);letter-spacing:.02em;line-height:.9;margin-bottom:1.2rem;opacity:0;animation:sli .5s ease .2s forwards}
+.ph-desc{font-size:.93rem;line-height:1.85;color:rgba(240,238,248,.5);max-width:560px;opacity:0;animation:sli .5s ease .35s forwards}
+/* FILTER TABS */
+.filter-bar{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:3rem}
+.ftab{font-family:'Rajdhani',sans-serif;font-size:.78rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.5rem 1.2rem;border:1px solid var(--brd);color:var(--mu);cursor:none;transition:all .2s;clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%);background:transparent}
+.ftab:hover,.ftab.on{border-color:var(--or);color:var(--or);background:rgba(255,77,0,.08)}
+/* PORTFOLIO GRID */
+.pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+.pcard{position:relative;overflow:hidden;background:var(--bg3);cursor:none;transition:transform .3s}
+.pcard:hover{transform:scale(1.01)}
+.pcard:hover .pc-over{opacity:1}
+.pcard-svg{width:100%;display:block}
+.pc-over{position:absolute;inset:0;background:rgba(7,7,10,.85);display:flex;flex-direction:column;justify-content:flex-end;padding:2rem;opacity:0;transition:opacity .3s}
+.pc-tag{font-family:'Rajdhani',sans-serif;font-size:.65rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--or);margin-bottom:.4rem}
+.pc-title{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:.03em;margin-bottom:.4rem}
+.pc-type{font-size:.72rem;color:var(--mu)}
+/* STATS -->
+#stats{background:var(--bg2)}
+.stat-row{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--brd)}
+.stt{padding:3rem 2.5rem;border-right:1px solid var(--brd);transition:background .3s}
+.stt:hover{background:var(--bg3)}.stt:last-child{border-right:none}
+.stt-n{font-family:'Bebas Neue',sans-serif;font-size:3.5rem;letter-spacing:.05em;color:var(--or);line-height:1;margin-bottom:.3rem}
+.stt-l{font-family:'Rajdhani',sans-serif;font-size:.8rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--mu)}
+/* CLIENTS -->
+#clients-section{background:var(--bg)}
+.client-logos{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--brd);margin-top:3rem}
+.cl{padding:2.5rem;border-right:1px solid var(--brd);display:flex;align-items:center;justify-content:center;transition:background .2s}
+.cl:hover{background:var(--bg3)}.cl:last-child{border-right:none}
+.cl-inner{text-align:center}
+.cl-name{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:.05em;color:rgba(240,238,248,.5);transition:color .2s}
+.cl:hover .cl-name{color:var(--or)}
+.cl-type{font-family:'Rajdhani',sans-serif;font-size:.65rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mu);margin-top:.3rem}
+/* CTA */
+#cta-band{background:var(--or);padding:5rem;display:flex;justify-content:space-between;align-items:center;gap:2rem}
+.cta-band-t{font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,4vw,3.5rem);letter-spacing:.03em;line-height:1;color:#fff}
+footer{background:#040406;padding:2.2rem 5rem;display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--brd)}
+.fl{display:flex;flex-direction:column;gap:.4rem}
+.ftt{font-family:'Rajdhani',sans-serif;font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--mu)}
+.flinks{display:flex;gap:2rem;list-style:none}
+.flinks a{font-family:'Rajdhani',sans-serif;font-size:.76rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--mu);text-decoration:none;transition:color .2s}
+.flinks a:hover{color:var(--or)}
+@keyframes sli{from{opacity:0;transform:translateX(-30px)}to{opacity:1;transform:translateX(0)}}
+.rv{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}.rv.vs{opacity:1;transform:none}
+@media(max-width:1100px){nav{padding:1rem 1.5rem}.nav-links{display:none}section{padding:4rem 1.5rem}.page-hero{padding:8rem 1.5rem 3rem}.pgrid{grid-template-columns:1fr}.stat-row,.client-logos{grid-template-columns:1fr 1fr}.stt,.cl{border-right:none!important}#cta-band{flex-direction:column;padding:3rem 1.5rem}footer{flex-direction:column;gap:1.5rem;text-align:center}.flinks{justify-content:center}}
+</style>
+</head>
+<body>
+<div class="cur" id="cur"></div><div class="cur-ring" id="ring"></div>
+<nav>
+  <a class="logo" href="index.html"><span>D</span>AASA</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li><li><a href="services.html">Services</a></li>
+    <li><a href="pricing.html">Pricing</a></li><li><a href="portfolio.html" class="active">Portfolio</a></li>
+    <li><a href="about.html">About</a></li><li><a href="contact.html" class="nav-cta">Contact Us ▶</a></li>
+  </ul>
+</nav>
+
+<div class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="ph-tag">Our Work</div>
+  <h1 class="ph-title">CONTENT<br>WE'VE BUILT.</h1>
+  <p class="ph-desc">A growing body of work across creators, brands, and broadcast. Every project — AI-powered, South India-rooted.</p>
+</div>
+
+<section id="portfolio-main">
+  <div class="filter-bar rv">
+    <button class="ftab on">All Work</button>
+    <button class="ftab">Video Production</button>
+    <button class="ftab">Social Media</button>
+    <button class="ftab">Broadcast</button>
+    <button class="ftab">Websites</button>
+    <button class="ftab">Vernacular</button>
+  </div>
+
+  <div class="pgrid rv">
+
+    <!-- Card 1 -->
+    <div class="pcard">
+      <svg class="pcard-svg" viewBox="0 0 400 280" fill="none">
+        <rect width="400" height="280" fill="#0D0D12"/>
+        <g opacity="0.05" stroke="white" stroke-width="1.5"><line x1="200" y1="140" x2="0" y2="0"/><line x1="200" y1="140" x2="400" y2="0"/><line x1="200" y1="140" x2="0" y2="280"/><line x1="200" y1="140" x2="400" y2="280"/></g>
+        <rect x="60" y="45" width="280" height="160" rx="8" fill="#1A1A26" stroke="#FF4D00" stroke-width="1.5"/>
+        <rect x="74" y="57" width="252" height="136" rx="4" fill="#060610"/>
+        <polyline points="84,125 104,98 124,130 144,92 164,116 184,90 204,122 224,104 244,118 264,96 284,112 304,128 324,100 316,120" stroke="#FF4D00" stroke-width="2.5" fill="none"/>
+        <polyline points="84,138 104,112 124,144 144,106 164,130 184,104 204,136 224,118 244,132 264,110 284,126 304,142 324,114" stroke="#00E5FF" stroke-width="1.5" fill="none" opacity="0.4"/>
+        <circle cx="344" cy="65" r="8" fill="#FF4D00"><animate attributeName="opacity" values="1;0.15;1" dur="1.4s" repeatCount="indefinite"/></circle>
+        <text x="300" y="220" font-family="'Bebas Neue',sans-serif" font-size="28" fill="rgba(255,77,0,0.08)" letter-spacing="2">BRAND</text>
+      </svg>
+      <div class="pc-over">
+        <div class="pc-tag">Brand Video</div>
+        <div class="pc-title">Startup Launch Campaign</div>
+        <div class="pc-type">Script · Production · Post-Production</div>
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="pcard">
+      <svg class="pcard-svg" viewBox="0 0 400 280" fill="none">
+        <rect width="400" height="280" fill="#0D0D12"/>
+        <g opacity="0.05" stroke="white" stroke-width="1.5"><line x1="200" y1="140" x2="0" y2="0"/><line x1="200" y1="140" x2="400" y2="0"/><line x1="200" y1="140" x2="0" y2="280"/><line x1="200" y1="140" x2="400" y2="280"/></g>
+        <!-- TV Event illustration -->
+        <rect x="50" y="40" width="300" height="185" rx="8" fill="#1A1A26" stroke="#FF4D00" stroke-width="2"/>
+        <rect x="64" y="52" width="272" height="160" rx="4" fill="#06060E"/>
+        <path d="M110 132 Q200 78 290 132" stroke="#FF4D00" stroke-width="3" fill="none" stroke-dasharray="10,6"><animate attributeName="opacity" values="0.9;0.15;0.9" dur="1.2s" repeatCount="indefinite"/></path>
+        <path d="M130 145 Q200 98 270 145" stroke="#FF4D00" stroke-width="2" fill="none" stroke-dasharray="8,5"><animate attributeName="opacity" values="0.6;0.06;0.6" dur="1.2s" begin="0.35s" repeatCount="indefinite"/></path>
+        <rect x="68" y="178" width="80" height="26" rx="3" fill="#FF4D00" opacity="0.8"/>
+        <text x="76" y="194" font-size="9" fill="white" font-family="monospace" font-weight="bold">ZEE KANNADA</text>
+        <text x="280" y="80" font-family="'Bebas Neue',sans-serif" font-size="22" fill="rgba(255,77,0,0.18)" letter-spacing="1">LIVE</text>
+        <circle cx="362" cy="56" r="7" fill="#FF4D00"><animate attributeName="opacity" values="1;0.1;1" dur="0.8s" repeatCount="indefinite"/></circle>
+      </svg>
+      <div class="pc-over">
+        <div class="pc-tag">Broadcast</div>
+        <div class="pc-title">Reality Show Finale — Zee Kannada</div>
+        <div class="pc-type">Post-Production · Colour Grade · Delivery in 5 Days</div>
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="pcard">
+      <svg class="pcard-svg" viewBox="0 0 400 280" fill="none">
+        <rect width="400" height="280" fill="#0D0D12"/>
+        <g opacity="0.05" stroke="white" stroke-width="1.5"><line x1="200" y1="140" x2="0" y2="0"/><line x1="200" y1="140" x2="400" y2="0"/><line x1="200" y1="140" x2="0" y2="280"/><line x1="200" y1="140" x2="400" y2="280"/></g>
+        <!-- Website mockup -->
+        <rect x="40" y="30" width="320" height="210" rx="8" fill="#0C0C14" stroke="#2A2A3A"/>
+        <rect x="40" y="30" width="320" height="26" rx="8" fill="#1A1A26"/>
+        <rect x="40" y="48" width="320" height="8" fill="#1A1A26"/>
+        <circle cx="56" cy="43" r="4" fill="#FF4D00" opacity="0.6"/>
+        <circle cx="70" cy="43" r="4" fill="#FFE500" opacity="0.6"/>
+        <circle cx="84" cy="43" r="4" fill="#00E5FF" opacity="0.4"/>
+        <rect x="100" y="37" width="180" height="12" rx="4" fill="#0C0C12"/>
+        <rect x="54" y="70" width="130" height="18" rx="3" fill="#FF4D00" opacity="0.7"/>
+        <rect x="54" y="98" width="200" height="5" rx="2" fill="#2A2A3A"/>
+        <rect x="54" y="110" width="160" height="5" rx="2" fill="#2A2A3A"/>
+        <rect x="54" y="128" width="80" height="22" rx="4" fill="#FF4D00"/>
+        <rect x="230" y="65" width="116" height="140" rx="6" fill="#1A1A26"/>
+        <circle cx="288" cy="128" r="32" fill="rgba(255,77,0,0.15)" stroke="#FF4D00" stroke-width="1.2"/>
+        <polygon points="278,118 278,138 294,128" fill="#FF4D00" opacity="0.7"/>
+        <text x="54" y="215" font-size="8" fill="#3A3A5A" font-family="monospace">VISITORS: 2.4K / DAY</text>
+        <text x="180" y="215" font-size="8" fill="#FF4D00" font-family="monospace">CONV: 8.2%</text>
+      </svg>
+      <div class="pc-over">
+        <div class="pc-tag">Website</div>
+        <div class="pc-title">D2C Brand Website &amp; Landing Page</div>
+        <div class="pc-type">Design · Development · SEO</div>
+      </div>
+    </div>
+
+    <!-- Card 4 -->
+    <div class="pcard">
+      <svg class="pcard-svg" viewBox="0 0 400 280" fill="none">
+        <rect width="400" height="280" fill="#0D0D12"/>
+        <g opacity="0.05" stroke="white" stroke-width="1.5"><line x1="200" y1="140" x2="0" y2="0"/><line x1="200" y1="140" x2="400" y2="0"/><line x1="200" y1="140" x2="0" y2="280"/><line x1="200" y1="140" x2="400" y2="280"/></g>
+        <!-- Social media grid -->
+        <rect x="30" y="30" width="102" height="102" rx="5" fill="#1A1A26" stroke="#FF4D00" stroke-width="1.2"/>
+        <rect x="38" y="38" width="86" height="52" rx="3" fill="#FF4D00" opacity="0.25"/>
+        <polygon points="70,52 70,64 82,58" fill="#FF4D00" opacity="0.8"/>
+        <text x="38" y="110" font-size="8" fill="#FF4D00" font-family="monospace" font-weight="bold">↑ 142K</text>
+        <rect x="148" y="30" width="102" height="102" rx="5" fill="#1A1A26" stroke="#00E5FF" stroke-width="1.2"/>
+        <text x="172" y="76" font-size="28" fill="rgba(240,238,248,0.15)" font-family="serif">ಕನ್ನಡ</text>
+        <text x="158" y="108" font-size="8" fill="#00E5FF" font-family="monospace" font-weight="bold">♥ 48K</text>
+        <rect x="268" y="30" width="102" height="102" rx="5" fill="#1A1A26" stroke="#FFE500" stroke-width="1.2"/>
+        <rect x="276" y="38" width="86" height="52" rx="3" fill="#FFE500" opacity="0.12"/>
+        <text x="276" y="108" font-size="8" fill="#FFE500" font-family="monospace" font-weight="bold">▶ 28K</text>
+        <!-- Bottom row smaller -->
+        <rect x="30" y="148" width="68" height="68" rx="5" fill="#1A1A26" stroke="#2A2A3A"/>
+        <rect x="114" y="148" width="68" height="68" rx="5" fill="#1A1A26" stroke="#2A2A3A"/>
+        <rect x="198" y="148" width="68" height="68" rx="5" fill="#1A1A26" stroke="#2A2A3A"/>
+        <rect x="282" y="148" width="88" height="68" rx="5" fill="rgba(255,77,0,0.1)" stroke="#FF4D00" stroke-width="1"/>
+        <text x="296" y="180" font-family="'Bebas Neue',sans-serif" font-size="14" fill="#FF4D00" letter-spacing="1">+32K</text>
+        <text x="296" y="198" font-size="7" fill="rgba(240,238,248,0.5)" font-family="monospace">FOLLOWERS</text>
+        <text x="30" y="238" font-size="7.5" fill="rgba(240,238,248,0.35)" font-family="monospace">30-DAY GROWTH CAMPAIGN</text>
+      </svg>
+      <div class="pc-over">
+        <div class="pc-tag">Social Media</div>
+        <div class="pc-title">Kannada Creator Growth Campaign</div>
+        <div class="pc-type">Strategy · Content · Community Management</div>
+      </div>
+    </div>
+
+    <!-- Card 5 -->
+    <div class="pcard">
+      <svg class="pcard-svg" viewBox="0 0 400 280" fill="none">
+        <rect width="400" height="280" fill="#0D0D12"/>
+        <g opacity="0.05" stroke="white" stroke-width="1.5"><line x1="200" y1="140" x2="0" y2="0"/><line x1="200" y1="140" x2="400" y2="0"/><line x1="200" y1="140" x2="0" y2="280"/><line x1="200" y1="140" x2="400" y2="280"/></g>
+        <!-- Film production scene -->
+        <rect x="50" y="35" width="300" height="190" rx="10" fill="#1A1A26" stroke="#FF4D00" stroke-width="2"/>
+        <!-- Camera -->
+        <rect x="90" y="100" width="100" height="70" rx="6" fill="#12121A" stroke="#FF4D00" stroke-width="1.5"/>
+        <circle cx="140" cy="135" r="26" fill="#0A0A10" stroke="#FF4D00" stroke-width="2"/>
+        <circle cx="140" cy="135" r="16" fill="#141420"/>
+        <circle cx="140" cy="135" r="7" fill="#FF4D00" opacity="0.8"/>
+        <rect x="176" y="112" width="22" height="56" rx="5" fill="#141420" stroke="#2A2A3A"/>
+        <circle cx="100" cy="108" r="6" fill="#FF4D00"><animate attributeName="opacity" values="1;0.1;1" dur="1.4s" repeatCount="indefinite"/></circle>
+        <!-- Subject -->
+        <rect x="240" y="70" width="90" height="155" rx="5" fill="#12121A" stroke="#2A2A3A"/>
+        <ellipse cx="285" cy="110" rx="22" ry="24" fill="#FFCBA4"/>
+        <rect x="268" y="130" width="34" height="50" rx="5" fill="#FF4D00"/>
+        <text x="272" y="180" font-size="7" fill="white" font-family="monospace">DAASA</text>
+        <!-- Script notes -->
+        <rect x="54" y="45" width="75" height="45" rx="4" fill="#0A0A14"/>
+        <rect x="60" y="52" width="60" height="4" rx="2" fill="#FF4D00" opacity="0.5"/>
+        <rect x="60" y="60" width="50" height="3" rx="2" fill="#2A2A3A"/>
+        <rect x="60" y="67" width="55" height="3" rx="2" fill="#2A2A3A"/>
+        <rect x="60" y="74" width="45" height="3" rx="2" fill="#2A2A3A"/>
+        <rect x="62" y="200" width="120" height="20" rx="4" fill="#FF4D00" opacity="0.9"/>
+        <text x="70" y="213" font-size="8" fill="white" font-family="monospace" font-weight="bold">LOCATION SHOOT</text>
+      </svg>
+      <div class="pc-over">
+        <div class="pc-tag">Video Production</div>
+        <div class="pc-title">Vernacular Documentary Series</div>
+        <div class="pc-type">Scripting · Shoot · Post · Kannada</div>
+      </div>
+    </div>
+
+    <!-- Card 6 -->
+    <div class="pcard">
+      <svg class="pcard-svg" viewBox="0 0 400 280" fill="none">
+        <rect width="400" height="280" fill="#0D0D12"/>
+        <g opacity="0.05" stroke="white" stroke-width="1.5"><line x1="200" y1="140" x2="0" y2="0"/><line x1="200" y1="140" x2="400" y2="0"/><line x1="200" y1="140" x2="0" y2="280"/><line x1="200" y1="140" x2="400" y2="280"/></g>
+        <!-- Award event -->
+        <rect x="40" y="35" width="320" height="195" rx="8" fill="#1A1A26" stroke="#2A2A3A"/>
+        <!-- Trophy center -->
+        <rect x="170" y="80" width="60" height="80" rx="4" fill="#FFE500" opacity="0.15" stroke="#FFE500" stroke-width="1"/>
+        <path d="M185 80 Q200 55 215 80" fill="#FFE500" opacity="0.4" stroke="#FFE500" stroke-width="1.5"/>
+        <text x="188" y="130" font-size="30" fill="#FFE500" opacity="0.7">🏆</text>
+        <!-- Stage lights -->
+        <path d="M100 35 L150 100" stroke="#FFE500" stroke-width="12" opacity="0.06"/>
+        <path d="M200 35 L200 90" stroke="#FFE500" stroke-width="18" opacity="0.08"/>
+        <path d="M300 35 L250 100" stroke="#FFE500" stroke-width="12" opacity="0.06"/>
+        <!-- ticker bar -->
+        <rect x="40" y="196" width="320" height="28" rx="4" fill="#FF4D00" opacity="0.9"/>
+        <text x="58" y="213" font-size="9" fill="white" font-family="monospace" font-weight="bold">SUVARNA TV AWARDS — DELIVERED IN 6 DAYS ✓</text>
+        <!-- Stars -->
+        <text x="50" y="80" font-size="20" fill="#FFE500" opacity="0.5">★</text>
+        <text x="330" y="80" font-size="16" fill="#FFE500" opacity="0.4">★</text>
+        <text x="50" y="180" font-size="12" fill="#FFE500" opacity="0.3">✦</text>
+        <text x="345" y="180" font-size="14" fill="#FF4D00" opacity="0.4">⚡</text>
+      </svg>
+      <div class="pc-over">
+        <div class="pc-tag">Broadcast</div>
+        <div class="pc-title">Award Ceremony — Suvarna TV</div>
+        <div class="pc-type">Event Editing · AI Colour · 6-Day Delivery</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- STATS -->
+<section id="stats">
+  <div class="rv"><p class="lbl">By The Numbers</p><h2 class="stit">DAASA IN NUMBERS.</h2></div>
+  <div class="stat-row rv">
+    <div class="stt"><div class="stt-n">50+</div><div class="stt-l">Projects Delivered</div></div>
+    <div class="stt"><div class="stt-n">3</div><div class="stt-l">TV Channels Served</div></div>
+    <div class="stt"><div class="stt-n">5.8M+</div><div class="stt-l">Total Views Generated</div></div>
+    <div class="stt"><div class="stt-n">100%</div><div class="stt-l">On-Time Delivery Rate</div></div>
+  </div>
+</section>
+
+<!-- CLIENT LOGOS -->
+<section id="clients-section">
+  <div class="rv"><p class="lbl">Clients &amp; Partners</p><h2 class="stit">WHO WE'VE WORKED WITH.</h2></div>
+  <div class="client-logos rv">
+    <div class="cl"><div class="cl-inner"><div class="cl-name">ZEE KANNADA</div><div class="cl-type">Broadcast</div></div></div>
+    <div class="cl"><div class="cl-inner"><div class="cl-name">SUVARNA TV</div><div class="cl-type">Broadcast</div></div></div>
+    <div class="cl"><div class="cl-inner"><div class="cl-name">COLORS KANNADA</div><div class="cl-type">Broadcast</div></div></div>
+    <div class="cl"><div class="cl-inner"><div class="cl-name">LOCAL BRANDS</div><div class="cl-type">Bengaluru Startups</div></div></div>
+  </div>
+</section>
+
+<div id="cta-band">
+  <div class="cta-band-t">WANT YOUR PROJECT HERE?</div>
+  <a href="contact.html" class="btn btn-w">Start a Project ▶</a>
+</div>
+
+<footer>
+  <div class="fl"><a class="logo" href="index.html"><span>D</span>AASA</a><p class="ftt">AI-Powered Vernacular Content Studio · Bengaluru · Est. 2026</p></div>
+  <ul class="flinks"><li><a href="services.html">Services</a></li><li><a href="pricing.html">Pricing</a></li><li><a href="portfolio.html">Portfolio</a></li><li><a href="about.html">About</a></li><li><a href="contact.html">Contact</a></li></ul>
+</footer>
+<script>
+const cur=document.getElementById('cur'),ring=document.getElementById('ring');let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
+(function loop(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(loop);})();
+document.querySelectorAll('a,button').forEach(el=>{el.addEventListener('mouseenter',()=>{cur.style.width='20px';cur.style.height='20px';ring.style.width='54px';ring.style.height='54px';});el.addEventListener('mouseleave',()=>{cur.style.width='12px';cur.style.height='12px';ring.style.width='36px';ring.style.height='36px';});});
+document.querySelectorAll('.ftab').forEach(btn=>{btn.addEventListener('click',()=>{document.querySelectorAll('.ftab').forEach(b=>b.classList.remove('on'));btn.classList.add('on');});});
+const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('vs');}),{threshold:.08});
+document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
+</script>
+</body></html>

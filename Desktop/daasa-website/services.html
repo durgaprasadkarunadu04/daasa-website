@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Services — Daasa Studio</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;600;700&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#07070A;--bg2:#0D0D12;--bg3:#12121A;--sf:#1A1A26;--brd:rgba(255,255,255,0.07);--or:#FF4D00;--or2:#FF6B2B;--cy:#00E5FF;--ye:#FFE500;--wh:#F0EEF8;--mu:#5A5870}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--wh);font-family:'Inter',sans-serif;font-weight:300;overflow-x:hidden;cursor:none}
+.cur{position:fixed;width:12px;height:12px;background:var(--or);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);mix-blend-mode:screen;transition:width .2s,height .2s}
+.cur-ring{position:fixed;width:36px;height:36px;border:1px solid rgba(255,77,0,.5);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .3s,height .3s}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1.2rem 5rem;border-bottom:1px solid var(--brd);background:rgba(7,7,10,.94);backdrop-filter:blur(20px)}
+.logo{font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:.1em;color:var(--wh);text-decoration:none;position:relative}
+.logo::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--or)}
+.logo span{color:var(--or)}
+.nav-links{display:flex;gap:1.8rem;list-style:none;align-items:center}
+.nav-links a{font-family:'Rajdhani',sans-serif;font-size:.85rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mu);text-decoration:none;transition:color .2s;position:relative}
+.nav-links a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:1px;background:var(--or);transition:width .2s}
+.nav-links a:hover{color:var(--wh)}.nav-links a:hover::after{width:100%}
+.nav-links a.active{color:var(--or)}.nav-links a.active::after{width:100%}
+.nav-cta{background:var(--or)!important;color:#fff!important;padding:.5rem 1.4rem!important;clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);font-weight:700!important}
+.nav-cta::after{display:none!important}
+/* PAGE HERO */
+.page-hero{padding:10rem 5rem 5rem;position:relative;overflow:hidden;border-bottom:1px solid var(--brd);display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+.page-hero-bg{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 60% 80% at 80% 50%,rgba(255,77,0,.07) 0%,transparent 70%)}
+.ph-tag{display:inline-flex;align-items:center;gap:.5rem;background:rgba(255,77,0,.12);border:1px solid rgba(255,77,0,.3);padding:.4rem 1rem;font-family:'Rajdhani',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--or);margin-bottom:1.5rem;clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%);opacity:0;animation:sli .5s ease .1s forwards}
+.ph-tag::before{content:'//';opacity:.5;font-size:.65rem}
+.ph-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(3.5rem,8vw,7rem);letter-spacing:.02em;line-height:.9;margin-bottom:1.2rem;opacity:0;animation:sli .5s ease .2s forwards}
+.ph-desc{font-size:.93rem;line-height:1.85;color:rgba(240,238,248,.5);opacity:0;animation:sli .5s ease .35s forwards}
+.ph-right{display:flex;justify-content:center;opacity:0;animation:sliR .7s ease .3s forwards}
+.ph-svg{width:100%;max-width:440px;filter:drop-shadow(0 0 30px rgba(255,77,0,.15));animation:flt 4s ease-in-out infinite}
+/* SHARED */
+section{padding:6rem 5rem;position:relative}
+.lbl{font-family:'Rajdhani',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.25em;text-transform:uppercase;color:var(--or);margin-bottom:.8rem;display:flex;align-items:center;gap:.5rem}
+.lbl::before{content:'//';opacity:.5}
+.stit{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.2rem,4vw,3.6rem);letter-spacing:.03em;line-height:1;margin-bottom:1.5rem}
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 2rem;font-family:'Rajdhani',sans-serif;font-size:.88rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;cursor:none;transition:all .2s;border:none}
+.btn-f{background:var(--or);color:#fff;clip-path:polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%)}
+.btn-f:hover{background:var(--or2);transform:translateY(-2px)}
+.btn-g{background:transparent;color:rgba(240,238,248,.6);border:1px solid var(--brd);clip-path:polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%)}
+.btn-g:hover{border-color:var(--or);color:var(--or)}
+/* SERVICES GRID */
+#svc-full{background:var(--bg2)}
+.svc-block{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--brd);margin-bottom:2px}
+.svc-block:nth-child(even){direction:rtl}.svc-block:nth-child(even)>*{direction:ltr}
+.svc-img{background:var(--bg3);display:flex;align-items:center;justify-content:center;padding:3rem;min-height:280px}
+.svc-img svg{width:100%;max-width:320px}
+.svc-info{padding:4rem;display:flex;flex-direction:column;justify-content:center}
+.svc-num{font-family:'Bebas Neue',sans-serif;font-size:4rem;color:rgba(255,77,0,.1);line-height:1;margin-bottom:.5rem}
+.svc-name{font-family:'Bebas Neue',sans-serif;font-size:2.2rem;letter-spacing:.03em;margin-bottom:1rem;line-height:1}
+.svc-desc{font-size:.88rem;line-height:1.9;color:rgba(240,238,248,.5);margin-bottom:1.5rem}
+.svc-list{list-style:none;display:flex;flex-direction:column;gap:.5rem}
+.svc-list li{font-size:.78rem;color:var(--mu);padding-left:1.2rem;position:relative}
+.svc-list li::before{content:'▸';position:absolute;left:0;color:var(--or);font-size:.65rem}
+/* HOW -->
+#how{background:var(--bg)}
+.pstrip{display:grid;grid-template-columns:repeat(5,1fr);border:1px solid var(--brd)}
+.ps{padding:2.8rem 1.8rem;border-right:1px solid var(--brd);transition:background .2s}
+.ps:last-child{border-right:none}.ps:hover{background:var(--sf)}
+.ps-n{font-family:'Bebas Neue',sans-serif;font-size:3rem;color:rgba(255,77,0,.1);line-height:1;margin-bottom:.8rem}
+.ps-ic{font-size:1.7rem;margin-bottom:.8rem}
+.ps-t{font-family:'Rajdhani',sans-serif;font-size:.88rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:.45rem}
+.ps-d{font-size:.72rem;color:var(--mu);line-height:1.75}
+/* CTA */
+#cta-band{background:var(--or);padding:5rem;display:flex;justify-content:space-between;align-items:center;gap:2rem}
+.cta-band-t{font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,4vw,3.5rem);letter-spacing:.03em;line-height:1;color:#fff}
+.btn-dark{background:#fff;color:var(--or);clip-path:polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%)}
+.btn-dark:hover{background:#f0efe8}
+/* FOOTER */
+footer{background:#040406;padding:2.2rem 5rem;display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--brd)}
+.fl{display:flex;flex-direction:column;gap:.4rem}
+.ftt{font-family:'Rajdhani',sans-serif;font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--mu)}
+.flinks{display:flex;gap:2rem;list-style:none}
+.flinks a{font-family:'Rajdhani',sans-serif;font-size:.76rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--mu);text-decoration:none;transition:color .2s}
+.flinks a:hover{color:var(--or)}
+@keyframes sli{from{opacity:0;transform:translateX(-30px)}to{opacity:1;transform:translateX(0)}}
+@keyframes sliR{from{opacity:0;transform:translateX(40px)}to{opacity:1;transform:translateX(0)}}
+@keyframes flt{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.rv{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}.rv.vs{opacity:1;transform:none}
+@media(max-width:1100px){nav{padding:1rem 1.5rem}.nav-links{display:none}section{padding:4rem 1.5rem}.page-hero{grid-template-columns:1fr;padding:8rem 1.5rem 3rem}.ph-right{display:none}.svc-block{grid-template-columns:1fr}.svc-block:nth-child(even){direction:ltr}.pstrip{grid-template-columns:1fr 1fr}.ps{border-right:none!important}#cta-band{flex-direction:column;padding:3rem 1.5rem}footer{flex-direction:column;gap:1.5rem;text-align:center}.flinks{justify-content:center}}
+</style>
+</head>
+<body>
+<div class="cur" id="cur"></div><div class="cur-ring" id="ring"></div>
+<nav>
+  <a class="logo" href="index.html"><span>D</span>AASA</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="services.html" class="active">Services</a></li>
+    <li><a href="pricing.html">Pricing</a></li>
+    <li><a href="portfolio.html">Portfolio</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html" class="nav-cta">Contact Us ▶</a></li>
+  </ul>
+</nav>
+
+<div class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div>
+    <div class="ph-tag">Full-Stack Services</div>
+    <h1 class="ph-title">WHAT<br>WE DO.</h1>
+    <p class="ph-desc">Eight professional services. One studio. Powered by AI, delivered by people who understand South Indian content culture.</p>
+  </div>
+  <div class="ph-right">
+    <svg class="ph-svg" viewBox="0 0 440 360" fill="none">
+      <g opacity="0.05" stroke="white" stroke-width="1.5"><line x1="220" y1="180" x2="0" y2="0"/><line x1="220" y1="180" x2="220" y2="0"/><line x1="220" y1="180" x2="440" y2="0"/><line x1="220" y1="180" x2="0" y2="360"/><line x1="220" y1="180" x2="440" y2="360"/></g>
+      <!-- Central AI core -->
+      <circle cx="220" cy="180" r="50" fill="rgba(255,77,0,0.08)" stroke="#FF4D00" stroke-width="1.5" stroke-dasharray="8,4"/>
+      <circle cx="220" cy="180" r="30" fill="rgba(255,77,0,0.12)" stroke="#FF4D00" stroke-width="2"/>
+      <text x="208" y="188" font-size="22" fill="#FF4D00">⚡</text>
+      <!-- Service orbiting icons -->
+      <circle cx="220" cy="80" r="28" fill="#1A1A26" stroke="#FF4D00" stroke-width="1.5"/>
+      <text x="208" y="88" font-size="18">🎬</text>
+      <circle cx="340" cy="130" r="28" fill="#1A1A26" stroke="#00E5FF" stroke-width="1.5"/>
+      <text x="328" y="138" font-size="18">✂️</text>
+      <circle cx="340" cy="230" r="28" fill="#1A1A26" stroke="#FFE500" stroke-width="1.5"/>
+      <text x="328" y="238" font-size="18">📱</text>
+      <circle cx="220" cy="280" r="28" fill="#1A1A26" stroke="#FF4D00" stroke-width="1.5"/>
+      <text x="208" y="288" font-size="18">📺</text>
+      <circle cx="100" cy="230" r="28" fill="#1A1A26" stroke="#00E5FF" stroke-width="1.5"/>
+      <text x="88" y="238" font-size="18">🌐</text>
+      <circle cx="100" cy="130" r="28" fill="#1A1A26" stroke="#FFE500" stroke-width="1.5"/>
+      <text x="88" y="138" font-size="18">✍️</text>
+      <!-- Orbit ring -->
+      <circle cx="220" cy="180" r="100" fill="none" stroke="rgba(255,77,0,0.1)" stroke-width="1" stroke-dasharray="4,4"/>
+      <!-- Connection lines -->
+      <line x1="220" y1="108" x2="220" y2="150" stroke="#FF4D00" stroke-width="1" opacity="0.3"/>
+      <line x1="316" y1="142" x2="258" y2="164" stroke="#00E5FF" stroke-width="1" opacity="0.25"/>
+      <line x1="316" y1="218" x2="258" y2="196" stroke="#FFE500" stroke-width="1" opacity="0.25"/>
+      <line x1="220" y1="252" x2="220" y2="210" stroke="#FF4D00" stroke-width="1" opacity="0.3"/>
+      <line x1="124" y1="218" x2="182" y2="196" stroke="#00E5FF" stroke-width="1" opacity="0.25"/>
+      <line x1="124" y1="142" x2="182" y2="164" stroke="#FFE500" stroke-width="1" opacity="0.25"/>
+      <!-- Sparks -->
+      <polygon points="390,50 394,62 404,58 397,69 401,82 392,74 383,82 387,69 380,58 390,62" fill="#FFE500" opacity="0.7" stroke="#FF8800" stroke-width="1"/>
+      <polygon points="45,280 48,290 56,288 51,296 54,305 47,300 40,305 43,296 38,288 45,290" fill="#00E5FF" opacity="0.6"/>
+    </svg>
+  </div>
+</div>
+
+<!-- DETAILED SERVICES -->
+<section id="svc-full">
+  <!-- 1 -->
+  <div class="svc-block rv">
+    <div class="svc-img">
+      <svg viewBox="0 0 320 220" fill="none">
+        <rect x="15" y="10" width="290" height="200" rx="8" fill="#12121A" stroke="#2A2A3A"/>
+        <rect x="28" y="26" width="140" height="8" rx="4" fill="#FF4D00" opacity="0.7"/>
+        <rect x="28" y="42" width="264" height="5" rx="2" fill="#2A2A3A"/>
+        <rect x="28" y="54" width="210" height="5" rx="2" fill="#2A2A3A"/>
+        <rect x="28" y="66" width="240" height="5" rx="2" fill="#2A2A3A"/>
+        <rect x="28" y="78" width="180" height="5" rx="2" fill="#2A2A3A"/>
+        <rect x="28" y="90" width="220" height="5" rx="2" fill="#2A2A3A"/>
+        <rect x="28" y="102" width="170" height="5" rx="2" fill="#2A2A3A"/>
+        <rect x="206" y="102" width="8" height="14" rx="1" fill="#FF4D00"><animate attributeName="opacity" values="1;0;1" dur="1s" repeatCount="indefinite"/></rect>
+        <rect x="200" y="22" width="80" height="30" rx="5" fill="rgba(255,77,0,0.14)" stroke="#FF4D00" stroke-width="1.2"/>
+        <text x="215" y="35" font-size="10" fill="#FF4D00" font-family="monospace" font-weight="bold">AI</text>
+        <text x="210" y="47" font-size="8" fill="#FF4D00" font-family="monospace">SCRIPT</text>
+        <rect x="28" y="130" width="264" height="60" rx="4" fill="#0A0A14"/>
+        <text x="40" y="148" font-size="9" fill="rgba(240,238,248,0.6)" font-family="monospace">// SCENE 1: OPEN ON CITY</text>
+        <text x="40" y="162" font-size="9" fill="rgba(240,238,248,0.4)" font-family="monospace">NARRATOR: ಬೆಂಗಳೂರಿನ ಬೀದಿಗಳಲ್ಲಿ...</text>
+        <text x="40" y="176" font-size="9" fill="rgba(240,238,248,0.4)" font-family="monospace">CUT TO: Studio — Brand Logo REVEAL</text>
+        <circle cx="280" cy="160" r="5" fill="#FF4D00" opacity="0.6"/>
+        <polygon points="275,145 275,158 286,152" fill="#FF4D00" opacity="0.8"/>
+      </svg>
+    </div>
+    <div class="svc-info">
+      <div class="svc-num">01</div>
+      <div class="svc-name">SCRIPTING &amp; IDEATION</div>
+      <p class="svc-desc">Great content starts with a great script. Our AI-assisted scripting team develops story concepts, shooting scripts, and social copy — before a single camera turns on. We work in Kannada, Tamil, Telugu, and English.</p>
+      <ul class="svc-list">
+        <li>Long-form &amp; short-form video scripts</li>
+        <li>Social media content calendars</li>
+        <li>Brand story &amp; narrative development</li>
+        <li>Vernacular scripting in KN / TA / TE / EN</li>
+        <li>AI-accelerated concept generation</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 2 -->
+  <div class="svc-block rv">
+    <div class="svc-img">
+      <svg viewBox="0 0 320 220" fill="none">
+        <rect x="60" y="25" width="200" height="130" rx="10" fill="#1A1A26" stroke="#FF4D00" stroke-width="2"/>
+        <circle cx="160" cy="90" r="45" fill="#0A0A10" stroke="#FF4D00" stroke-width="2.5"/>
+        <circle cx="160" cy="90" r="30" fill="#14141E" stroke="#2A2A3A"/>
+        <circle cx="160" cy="90" r="15" fill="#FF4D00" opacity="0.2"/>
+        <circle cx="160" cy="90" r="7" fill="#FF4D00" opacity="0.85"/>
+        <ellipse cx="146" cy="78" rx="6" ry="5" fill="white" opacity="0.12"/>
+        <rect x="130" y="18" width="40" height="14" rx="4" fill="#1A1A26" stroke="#2A2A3A"/>
+        <rect x="230" y="55" width="30" height="70" rx="8" fill="#141420" stroke="#2A2A3A"/>
+        <circle cx="97" cy="35" r="8" fill="#FF4D00"><animate attributeName="opacity" values="1;0.15;1" dur="1.4s" repeatCount="indefinite"/></circle>
+        <text x="108" y="39" font-size="9" fill="#FF4D00" font-family="monospace" font-weight="bold">REC</text>
+        <line x1="20" y1="90" x2="54" y2="90" stroke="#FF4D00" stroke-width="1.2" opacity="0.35" stroke-dasharray="4,3"/>
+        <line x1="266" y1="90" x2="305" y2="90" stroke="#FF4D00" stroke-width="1.2" opacity="0.35" stroke-dasharray="4,3"/>
+        <!-- Lighting rig -->
+        <line x1="80" y1="10" x2="240" y2="10" stroke="#2A2A3A" stroke-width="2"/>
+        <line x1="120" y1="10" x2="120" y2="30" stroke="#2A2A3A" stroke-width="1.5"/>
+        <line x1="200" y1="10" x2="200" y2="30" stroke="#2A2A3A" stroke-width="1.5"/>
+        <ellipse cx="120" cy="34" rx="8" ry="5" fill="#FFE500" opacity="0.6"/>
+        <ellipse cx="200" cy="34" rx="8" ry="5" fill="#FFE500" opacity="0.6"/>
+        <!-- STUDIO tag -->
+        <rect x="60" y="165" width="200" height="30" rx="4" fill="#FF4D00" opacity="0.9"/>
+        <text x="100" y="184" font-family="'Bebas Neue',sans-serif" font-size="16" fill="white" letter-spacing="3">STUDIO SHOOT</text>
+        <!-- floor marks -->
+        <line x1="120" y1="200" x2="200" y2="200" stroke="#2A2A3A" stroke-width="1"/>
+        <text x="138" y="215" font-size="8" fill="#3A3A5A" font-family="monospace">MARK X</text>
+      </svg>
+    </div>
+    <div class="svc-info">
+      <div class="svc-num">02</div>
+      <div class="svc-name">VIDEO PRODUCTION</div>
+      <p class="svc-desc">Professional-grade video production — studio and on-location across Bengaluru. Our team handles everything from setup to wrap, so you just show up and perform.</p>
+      <ul class="svc-list">
+        <li>4K studio shoots &amp; on-location production</li>
+        <li>Professional lighting &amp; sound design</li>
+        <li>Teleprompter &amp; crew support</li>
+        <li>Multi-camera event coverage</li>
+        <li>Broadcast-standard technical specs</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 3 -->
+  <div class="svc-block rv">
+    <div class="svc-img">
+      <svg viewBox="0 0 320 220" fill="none">
+        <rect x="10" y="15" width="300" height="190" rx="8" fill="#0C0C14" stroke="#2A2A3A"/>
+        <rect x="22" y="32" width="276" height="18" rx="3" fill="#1A1A26"/>
+        <rect x="22" y="32" width="140" height="18" rx="3" fill="rgba(255,77,0,0.4)"/>
+        <rect x="22" y="56" width="276" height="18" rx="3" fill="#1A1A26"/>
+        <rect x="22" y="56" width="190" height="18" rx="3" fill="rgba(0,229,255,0.28)"/>
+        <rect x="22" y="80" width="276" height="18" rx="3" fill="#1A1A26"/>
+        <rect x="22" y="80" width="100" height="18" rx="3" fill="rgba(255,229,0,0.28)"/>
+        <rect x="22" y="104" width="276" height="18" rx="3" fill="#1A1A26"/>
+        <rect x="22" y="104" width="230" height="18" rx="3" fill="rgba(255,77,0,0.2)"/>
+        <!-- Audio waveform on orange track -->
+        <polyline points="28,40 40,34 52,42 64,33 76,40 88,36 100,41 112,35 124,40 136,37" stroke="#FF4D00" stroke-width="1.5" fill="none"/>
+        <!-- Playhead -->
+        <line x1="195" y1="22" x2="195" y2="175" stroke="#FF4D00" stroke-width="2"/>
+        <polygon points="187,22 195,14 203,22" fill="#FF4D00"/>
+        <!-- Time -->
+        <text x="22" y="26" font-size="7" fill="#3A3A5A" font-family="monospace">00:00:00</text>
+        <text x="240" y="26" font-size="7" fill="#3A3A5A" font-family="monospace">00:05:32</text>
+        <!-- AI badge -->
+        <rect x="230" y="150" width="60" height="22" rx="4" fill="rgba(255,77,0,0.14)" stroke="#FF4D00" stroke-width="0.8"/>
+        <text x="240" y="164" font-size="8" fill="#FF4D00" font-family="monospace" font-weight="bold">AI CUT</text>
+        <!-- Colour wheels -->
+        <circle cx="50" cy="170" r="18" fill="none" stroke="#FF4D00" stroke-width="1.5"/>
+        <circle cx="50" cy="170" r="10" fill="rgba(255,77,0,0.2)"/>
+        <circle cx="50" cy="170" r="4" fill="#FF4D00" opacity="0.7"/>
+        <circle cx="100" cy="170" r="18" fill="none" stroke="#00E5FF" stroke-width="1.5"/>
+        <circle cx="100" cy="170" r="10" fill="rgba(0,229,255,0.15)"/>
+        <circle cx="100" cy="170" r="4" fill="#00E5FF" opacity="0.6"/>
+        <circle cx="150" cy="170" r="18" fill="none" stroke="#FFE500" stroke-width="1.5"/>
+        <circle cx="150" cy="170" r="10" fill="rgba(255,229,0,0.15)"/>
+        <circle cx="150" cy="170" r="4" fill="#FFE500" opacity="0.6"/>
+      </svg>
+    </div>
+    <div class="svc-info">
+      <div class="svc-num">03</div>
+      <div class="svc-name">POST-PRODUCTION</div>
+      <p class="svc-desc">AI-accelerated editing with human artistry. We handle every element of post — from cut to delivery — fast enough for social, polished enough for broadcast.</p>
+      <ul class="svc-list">
+        <li>Multi-track video editing &amp; assembly</li>
+        <li>AI-assisted rough cut &amp; pacing</li>
+        <li>Professional colour grading</li>
+        <li>Motion graphics &amp; title sequences</li>
+        <li>Sound design, mixing &amp; music licensing</li>
+        <li>Subtitles in KN / TA / TE / EN</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 4 -->
+  <div class="svc-block rv">
+    <div class="svc-img">
+      <svg viewBox="0 0 320 220" fill="none">
+        <!-- Three phones -->
+        <rect x="40" y="30" width="65" height="115" rx="10" fill="#1A1A26" stroke="#2A2A3A"/>
+        <rect x="47" y="42" width="51" height="84" rx="4" fill="#080810"/>
+        <rect x="51" y="46" width="43" height="28" rx="3" fill="#FF4D00" opacity="0.25"/>
+        <polygon points="65,54 65,64 75,59" fill="#FF4D00" opacity="0.8"/>
+        <text x="52" y="90" font-size="7" fill="#FF4D00" font-family="monospace">↑ 48K</text>
+        <text x="52" y="100" font-size="7" fill="#00E5FF" font-family="monospace">♥ 12K</text>
+        <rect x="127" y="15" width="66" height="120" rx="10" fill="#1A1A26" stroke="#FF4D00" stroke-width="1.5"/>
+        <rect x="134" y="27" width="52" height="88" rx="4" fill="#080810"/>
+        <rect x="138" y="32" width="44" height="30" rx="3" fill="#FF4D00" opacity="0.35"/>
+        <polygon points="153,40 153,52 165,46" fill="#FF4D00" opacity="0.9"/>
+        <rect x="138" y="68" width="44" height="5" rx="2" fill="#2A2A3A"/>
+        <rect x="138" y="76" width="30" height="5" rx="2" fill="#2A2A3A"/>
+        <text x="140" y="100" font-size="7" fill="#FF4D00" font-family="monospace" font-weight="bold">↑ 142K</text>
+        <text x="140" y="110" font-size="7" fill="#00E5FF" font-family="monospace">♥ 38K</text>
+        <rect x="215" y="30" width="65" height="115" rx="10" fill="#1A1A26" stroke="#2A2A3A"/>
+        <rect x="222" y="42" width="51" height="84" rx="4" fill="#080810"/>
+        <rect x="226" y="46" width="43" height="28" rx="3" fill="#FF4D00" opacity="0.18"/>
+        <!-- Platform logos area -->
+        <rect x="40" y="155" width="240" height="40" rx="5" fill="#12121A"/>
+        <text x="58" y="179" font-size="9" fill="#FF4D00" font-family="monospace" font-weight="bold">YT</text>
+        <text x="100" y="179" font-size="9" fill="#00E5FF" font-family="monospace" font-weight="bold">IG</text>
+        <text x="142" y="179" font-size="9" fill="#FFE500" font-family="monospace" font-weight="bold">FB</text>
+        <text x="182" y="179" font-size="9" fill="rgba(240,238,248,0.5)" font-family="monospace" font-weight="bold">LI</text>
+        <text x="218" y="179" font-size="9" fill="rgba(240,238,248,0.4)" font-family="monospace" font-weight="bold">TW</text>
+        <!-- Growth arrow -->
+        <path d="M260 140 Q270 120 280 100" stroke="#FF4D00" stroke-width="2" fill="none" marker-end="url(#arr)"/>
+        <polygon points="276,96 284,106 290,98" fill="#FF4D00"/>
+      </svg>
+    </div>
+    <div class="svc-info">
+      <div class="svc-num">04</div>
+      <div class="svc-name">SOCIAL MEDIA MANAGEMENT</div>
+      <p class="svc-desc">Your content doesn't stop performing when it's posted. Daasa manages the full lifecycle — from scheduling to community engagement to monthly analytics reports.</p>
+      <ul class="svc-list">
+        <li>Platform strategy &amp; content calendar</li>
+        <li>YouTube, Instagram, Facebook, LinkedIn</li>
+        <li>Community management &amp; engagement</li>
+        <li>Hashtag research &amp; SEO optimisation</li>
+        <li>Monthly analytics &amp; growth reports</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 5 -->
+  <div class="svc-block rv">
+    <div class="svc-img">
+      <svg viewBox="0 0 320 220" fill="none">
+        <rect x="10" y="15" width="300" height="190" rx="8" fill="#0C0C14" stroke="#2A2A3A"/>
+        <rect x="10" y="15" width="300" height="28" rx="8" fill="#1A1A26"/>
+        <rect x="10" y="35" width="300" height="8" fill="#1A1A26"/>
+        <circle cx="28" cy="29" r="5" fill="#FF4D00" opacity="0.6"/>
+        <circle cx="44" cy="29" r="5" fill="#FFE500" opacity="0.6"/>
+        <circle cx="60" cy="29" r="5" fill="#00E5FF" opacity="0.4"/>
+        <rect x="80" y="22" width="150" height="14" rx="4" fill="#0A0A12"/>
+        <text x="90" y="33" font-size="7" fill="#3A3A5A" font-family="monospace">https://daasa.in</text>
+        <!-- Hero section mockup -->
+        <rect x="24" y="55" width="120" height="16" rx="3" fill="#FF4D00" opacity="0.7"/>
+        <rect x="24" y="78" width="180" height="5" rx="2" fill="#2A2A3A"/>
+        <rect x="24" y="88" width="150" height="5" rx="2" fill="#2A2A3A"/>
+        <rect x="24" y="106" width="70" height="22" rx="4" fill="#FF4D00"/>
+        <text x="32" y="120" font-size="8" fill="white" font-family="monospace" font-weight="bold">GET STARTED</text>
+        <!-- Right side illustration -->
+        <rect x="218" y="52" width="78" height="95" rx="6" fill="#1A1A26" stroke="#2A2A3A"/>
+        <circle cx="257" cy="90" r="22" fill="rgba(255,77,0,0.15)" stroke="#FF4D00" stroke-width="1.2"/>
+        <polygon points="249,82 249,98 263,90" fill="#FF4D00" opacity="0.7"/>
+        <!-- Stats row -->
+        <rect x="24" y="160" width="272" height="30" rx="4" fill="#12121A"/>
+        <text x="36" y="178" font-size="7" fill="#FF4D00" font-family="monospace" font-weight="bold">VISITORS: 2.4K</text>
+        <text x="130" y="178" font-size="7" fill="#00E5FF" font-family="monospace" font-weight="bold">CONV: 8.2%</text>
+        <text x="220" y="178" font-size="7" fill="#FFE500" font-family="monospace" font-weight="bold">SEO: 94/100</text>
+      </svg>
+    </div>
+    <div class="svc-info">
+      <div class="svc-num">05</div>
+      <div class="svc-name">WEBSITE DEVELOPMENT</div>
+      <p class="svc-desc">Your website is your most permanent piece of content. Daasa builds brand websites, portfolio pages, and landing pages — optimised for search and conversion from day one.</p>
+      <ul class="svc-list">
+        <li>Brand websites &amp; portfolio sites</li>
+        <li>Product landing pages</li>
+        <li>SEO-optimised from build</li>
+        <li>Mobile-first responsive design</li>
+        <li>Handover with editable CMS</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 6 -->
+  <div class="svc-block rv">
+    <div class="svc-img">
+      <svg viewBox="0 0 320 220" fill="none">
+        <!-- Three speech bubbles -->
+        <rect x="15" y="20" width="120" height="60" rx="10" fill="#1A1A26" stroke="#FF4D00" stroke-width="1.8"/>
+        <polygon points="35,80 28,98 54,80" fill="#1A1A26" stroke="#FF4D00" stroke-width="1.8"/>
+        <text x="30" y="44" font-size="16" fill="rgba(240,238,248,0.9)" font-family="serif">ಕನ್ನಡ</text>
+        <text x="30" y="66" font-size="9" fill="#FF4D00" font-family="monospace" font-weight="bold">KANNADA</text>
+        <rect x="185" y="15" width="120" height="60" rx="10" fill="#1A1A26" stroke="#00E5FF" stroke-width="1.8"/>
+        <polygon points="286,75 293,93 270,75" fill="#1A1A26" stroke="#00E5FF" stroke-width="1.8"/>
+        <text x="200" y="39" font-size="16" fill="rgba(240,238,248,0.8)" font-family="serif">தமிழ்</text>
+        <text x="200" y="61" font-size="9" fill="#00E5FF" font-family="monospace" font-weight="bold">TAMIL</text>
+        <rect x="100" y="110" width="120" height="60" rx="10" fill="#1A1A26" stroke="#FFE500" stroke-width="1.8"/>
+        <polygon points="118,110 112,92 136,110" fill="#1A1A26" stroke="#FFE500" stroke-width="1.8"/>
+        <text x="115" y="134" font-size="16" fill="rgba(240,238,248,0.7)" font-family="serif">తెలుగు</text>
+        <text x="118" y="156" font-size="9" fill="#FFE500" font-family="monospace" font-weight="bold">TELUGU</text>
+        <!-- Stars -->
+        <text x="272" y="185" font-size="18" fill="#FFE500" opacity="0.7">★</text>
+        <text x="26" y="192" font-size="14" fill="#FF4D00" opacity="0.5">✦</text>
+        <text x="155" y="200" font-size="10" fill="#00E5FF" opacity="0.5">★</text>
+        <!-- 600M label -->
+        <rect x="230" y="155" width="82" height="34" rx="5" fill="rgba(255,77,0,0.12)" stroke="#FF4D00" stroke-width="1"/>
+        <text x="238" y="169" font-size="7" fill="#FF4D00" font-family="monospace" font-weight="bold">600M+</text>
+        <text x="238" y="181" font-size="6" fill="rgba(240,238,248,0.5)" font-family="monospace">USERS</text>
+      </svg>
+    </div>
+    <div class="svc-info">
+      <div class="svc-num">06</div>
+      <div class="svc-name">VERNACULAR CONTENT</div>
+      <p class="svc-desc">600M+ South Indians consume content in Kannada, Tamil, and Telugu. Daasa produces natively — not translated. Real scripts by people who live and breathe these languages.</p>
+      <ul class="svc-list">
+        <li>Native scripting in KN, TA, TE</li>
+        <li>Culturally-aware storytelling</li>
+        <li>Vernacular social media content</li>
+        <li>Dubbed &amp; subtitled versions</li>
+        <li>Regional talent network</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 7 -->
+  <div class="svc-block rv">
+    <div class="svc-img">
+      <svg viewBox="0 0 320 220" fill="none">
+        <!-- Hub -->
+        <circle cx="160" cy="110" r="35" fill="rgba(255,77,0,0.12)" stroke="#FF4D00" stroke-width="2"/>
+        <text x="147" y="118" font-size="22" fill="#FF4D00">⚡</text>
+        <!-- Nodes -->
+        <circle cx="160" cy="30" r="30" fill="#1A1A26" stroke="#2A2A3A" stroke-width="1.5"/>
+        <text x="148" y="38" font-size="18">🎥</text><text x="140" y="52" font-size="7" fill="#FF4D00" font-family="monospace">Director</text>
+        <circle cx="268" cy="72" r="30" fill="#1A1A26" stroke="#00E5FF" stroke-width="1.5"/>
+        <text x="256" y="80" font-size="18">✂️</text><text x="252" y="94" font-size="7" fill="#00E5FF" font-family="monospace">Editor</text>
+        <circle cx="268" cy="148" r="30" fill="#1A1A26" stroke="#FFE500" stroke-width="1.5"/>
+        <text x="256" y="156" font-size="18">🎨</text><text x="252" y="170" font-size="7" fill="#FFE500" font-family="monospace">Designer</text>
+        <circle cx="160" cy="190" r="30" fill="#1A1A26" stroke="#2A2A3A" stroke-width="1.5"/>
+        <text x="148" y="198" font-size="18">🎙️</text><text x="144" y="212" font-size="7" fill="rgba(240,238,248,0.5)" font-family="monospace">VO Artist</text>
+        <circle cx="52" cy="148" r="30" fill="#1A1A26" stroke="#FF4D00" stroke-width="1.5"/>
+        <text x="40" y="156" font-size="18">📐</text><text x="40" y="170" font-size="7" fill="#FF4D00" font-family="monospace">Animator</text>
+        <circle cx="52" cy="72" r="30" fill="#1A1A26" stroke="#00E5FF" stroke-width="1.5"/>
+        <text x="40" y="80" font-size="18">🎬</text><text x="40" y="94" font-size="7" fill="#00E5FF" font-family="monospace">DP</text>
+        <!-- Lines -->
+        <line x1="160" y1="60" x2="160" y2="75" stroke="#FF4D00" stroke-width="1" stroke-dasharray="4,3" opacity="0.4"/>
+        <line x1="242" y1="84" x2="192" y2="100" stroke="#00E5FF" stroke-width="1" stroke-dasharray="4,3" opacity="0.3"/>
+        <line x1="242" y1="136" x2="192" y2="120" stroke="#FFE500" stroke-width="1" stroke-dasharray="4,3" opacity="0.3"/>
+        <line x1="160" y1="160" x2="160" y2="145" stroke="#FF4D00" stroke-width="1" stroke-dasharray="4,3" opacity="0.4"/>
+        <line x1="78" y1="136" x2="128" y2="120" stroke="#FF4D00" stroke-width="1" stroke-dasharray="4,3" opacity="0.3"/>
+        <line x1="78" y1="84" x2="128" y2="100" stroke="#00E5FF" stroke-width="1" stroke-dasharray="4,3" opacity="0.3"/>
+      </svg>
+    </div>
+    <div class="svc-info">
+      <div class="svc-num">07</div>
+      <div class="svc-name">FREELANCER NETWORK</div>
+      <p class="svc-desc">Need specific talent for a specific shoot? Daasa's vetted freelancer network gives you access to South India's best independent creatives — without the overhead of an agency.</p>
+      <ul class="svc-list">
+        <li>Videographers &amp; cinematographers</li>
+        <li>Video editors &amp; motion designers</li>
+        <li>Kannada / Tamil / Telugu voice artists</li>
+        <li>Animators &amp; graphic designers</li>
+        <li>Per-project or ongoing placement</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 8 -->
+  <div class="svc-block rv">
+    <div class="svc-img">
+      <svg viewBox="0 0 320 220" fill="none">
+        <!-- TV -->
+        <rect x="30" y="20" width="260" height="148" rx="8" fill="#1A1A26" stroke="#FF4D00" stroke-width="2.5"/>
+        <rect x="44" y="32" width="232" height="120" rx="5" fill="#08080E"/>
+        <!-- Broadcast waves animated -->
+        <path d="M90 92 Q160 48 230 92" stroke="#FF4D00" stroke-width="3" fill="none" stroke-dasharray="10,6"><animate attributeName="opacity" values="0.9;0.1;0.9" dur="1.2s" repeatCount="indefinite"/></path>
+        <path d="M108 104 Q160 68 212 104" stroke="#FF4D00" stroke-width="2" fill="none" stroke-dasharray="8,5"><animate attributeName="opacity" values="0.6;0.05;0.6" dur="1.2s" begin="0.3s" repeatCount="indefinite"/></path>
+        <path d="M126 116 Q160 96 194 116" stroke="#FF4D00" stroke-width="1.5" fill="none" stroke-dasharray="6,5"><animate attributeName="opacity" values="0.4;0.02;0.4" dur="1.2s" begin="0.6s" repeatCount="indefinite"/></path>
+        <!-- Channel bar -->
+        <rect x="48" y="130" width="56" height="14" rx="3" fill="#FF4D00" opacity="0.7"/>
+        <text x="52" y="141" font-size="7" fill="white" font-family="monospace" font-weight="bold">ZEE KANNADA</text>
+        <rect x="110" y="130" width="52" height="14" rx="3" fill="#2A2A3A"/>
+        <text x="116" y="141" font-size="7" fill="rgba(240,238,248,0.5)" font-family="monospace">SUVARNA TV</text>
+        <rect x="168" y="130" width="52" height="14" rx="3" fill="#2A2A3A"/>
+        <text x="170" y="141" font-size="7" fill="rgba(240,238,248,0.5)" font-family="monospace">COLORS KN</text>
+        <!-- Stand -->
+        <rect x="148" y="168" width="24" height="22" rx="3" fill="#141420"/>
+        <rect x="118" y="188" width="84" height="10" rx="5" fill="#141420"/>
+        <!-- 5-7 DAYS badge -->
+        <rect x="242" y="28" width="44" height="38" rx="5" fill="rgba(255,77,0,0.95)"/>
+        <text x="248" y="44" font-size="11" fill="white" font-family="'Bebas Neue',sans-serif" letter-spacing="1">5–7</text>
+        <text x="248" y="58" font-size="7" fill="white" font-family="monospace">DAYS</text>
+        <!-- Antennas -->
+        <line x1="110" y1="20" x2="96" y2="5" stroke="#2A2A3A" stroke-width="2.5"/>
+        <line x1="210" y1="20" x2="224" y2="5" stroke="#2A2A3A" stroke-width="2.5"/>
+        <circle cx="96" cy="5" r="4" fill="#FF4D00" opacity="0.8"><animate attributeName="opacity" values="0.8;0.1;0.8" dur="0.8s" repeatCount="indefinite"/></circle>
+        <circle cx="224" cy="5" r="4" fill="#FF4D00" opacity="0.8"><animate attributeName="opacity" values="0.8;0.1;0.8" dur="0.8s" begin="0.4s" repeatCount="indefinite"/></circle>
+      </svg>
+    </div>
+    <div class="svc-info">
+      <div class="svc-num">08</div>
+      <div class="svc-name">BROADCAST EDITING</div>
+      <p class="svc-desc">The deadline is non-negotiable on broadcast. Daasa delivers broadcast-ready post-production in 5–7 days for TV events — reality shows, award ceremonies, cultural galas. Trusted by Zee Kannada, Suvarna TV, and Colors Kannada.</p>
+      <ul class="svc-list">
+        <li>Reality show event editing</li>
+        <li>Award ceremony &amp; cultural event coverage</li>
+        <li>AI colour grading &amp; parallel editing</li>
+        <li>Broadcast-standard delivery (5–7 days)</li>
+        <li>Per-event or annual retainer contracts</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="how">
+  <div class="rv"><p class="lbl">Process</p><h2 class="stit">HOW WE WORK.</h2></div>
+  <div class="pstrip rv">
+    <div class="ps"><div class="ps-n">01</div><div class="ps-ic">💬</div><div class="ps-t">Brief &amp; Strategy</div><div class="ps-d">You share goals, audience, and platform. We run an AI-assisted strategy session and build the plan.</div></div>
+    <div class="ps"><div class="ps-n">02</div><div class="ps-ic">✍️</div><div class="ps-t">Script &amp; Approve</div><div class="ps-d">Scripts submitted for review. One revision round before we move to production.</div></div>
+    <div class="ps"><div class="ps-n">03</div><div class="ps-ic">🎥</div><div class="ps-t">Shoot</div><div class="ps-d">Professional crew, studio or location. Every shoot is fully managed start to finish.</div></div>
+    <div class="ps"><div class="ps-n">04</div><div class="ps-ic">⚡</div><div class="ps-t">AI Edit &amp; Deliver</div><div class="ps-d">AI-assisted editing, QC, revisions, then final delivery to your specifications.</div></div>
+    <div class="ps"><div class="ps-n">05</div><div class="ps-ic">📊</div><div class="ps-t">Publish &amp; Track</div><div class="ps-d">We publish and manage channels. Monthly performance reports keep you in the loop.</div></div>
+  </div>
+</section>
+
+<div id="cta-band">
+  <div class="cta-band-t">READY TO START? LET'S TALK.</div>
+  <a href="contact.html" class="btn btn-dark">Get In Touch ▶</a>
+</div>
+
+<footer>
+  <div class="fl"><a class="logo" href="index.html"><span>D</span>AASA</a><p class="ftt">AI-Powered Vernacular Content Studio · Bengaluru · Est. 2026</p></div>
+  <ul class="flinks"><li><a href="services.html">Services</a></li><li><a href="pricing.html">Pricing</a></li><li><a href="portfolio.html">Portfolio</a></li><li><a href="about.html">About</a></li><li><a href="contact.html">Contact</a></li></ul>
+</footer>
+<script>
+const cur=document.getElementById('cur'),ring=document.getElementById('ring');let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
+(function loop(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(loop);})();
+document.querySelectorAll('a,button').forEach(el=>{el.addEventListener('mouseenter',()=>{cur.style.width='20px';cur.style.height='20px';ring.style.width='54px';ring.style.height='54px';});el.addEventListener('mouseleave',()=>{cur.style.width='12px';cur.style.height='12px';ring.style.width='36px';ring.style.height='36px';});});
+const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('vs');}),{threshold:.08});
+document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
+</script>
+</body></html>

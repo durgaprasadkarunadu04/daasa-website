@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — Daasa Studio</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;600;700&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#07070A;--bg2:#0D0D12;--bg3:#12121A;--sf:#1A1A26;--brd:rgba(255,255,255,0.07);--or:#FF4D00;--or2:#FF6B2B;--cy:#00E5FF;--ye:#FFE500;--wh:#F0EEF8;--mu:#5A5870}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--wh);font-family:'Inter',sans-serif;font-weight:300;overflow-x:hidden;cursor:none}
+.cur{position:fixed;width:12px;height:12px;background:var(--or);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);mix-blend-mode:screen;transition:width .2s,height .2s}
+.cur-ring{position:fixed;width:36px;height:36px;border:1px solid rgba(255,77,0,.5);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .3s,height .3s}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1.2rem 5rem;border-bottom:1px solid var(--brd);background:rgba(7,7,10,.94);backdrop-filter:blur(20px)}
+.logo{font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:.1em;color:var(--wh);text-decoration:none;position:relative}
+.logo::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--or)}
+.logo span{color:var(--or)}
+.nav-links{display:flex;gap:1.8rem;list-style:none;align-items:center}
+.nav-links a{font-family:'Rajdhani',sans-serif;font-size:.85rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mu);text-decoration:none;transition:color .2s;position:relative}
+.nav-links a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:1px;background:var(--or);transition:width .2s}
+.nav-links a:hover{color:var(--wh)}.nav-links a:hover::after{width:100%}
+.nav-links a.active{color:var(--or)}.nav-links a.active::after{width:100%}
+.nav-cta{background:var(--or)!important;color:#fff!important;padding:.5rem 1.4rem!important;clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);font-weight:700!important}
+.nav-cta::after{display:none!important}
+
+/* HERO */
+.page-hero{padding:10rem 5rem 6rem;position:relative;overflow:hidden;border-bottom:1px solid var(--brd);display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+.page-hero-bg{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 60% 80% at 80% 50%,rgba(255,77,0,.09) 0%,transparent 70%)}
+.ph-tag{display:inline-flex;align-items:center;gap:.5rem;background:rgba(255,77,0,.12);border:1px solid rgba(255,77,0,.3);padding:.4rem 1rem;font-family:'Rajdhani',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--or);margin-bottom:1.5rem;clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%);opacity:0;animation:sli .5s ease .1s forwards}
+.ph-tag::before{content:'//';opacity:.5}
+.ph-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(3.5rem,8vw,7rem);letter-spacing:.02em;line-height:.9;margin-bottom:1.5rem;opacity:0;animation:sli .5s ease .2s forwards}
+.ph-desc{font-size:.93rem;line-height:1.9;color:rgba(240,238,248,.5);margin-bottom:2rem;opacity:0;animation:sli .5s ease .35s forwards}
+
+/* CONTACT CHANNELS */
+.ch-grid{display:flex;flex-direction:column;gap:1rem;opacity:0;animation:sli .5s ease .5s forwards}
+.ch{display:flex;align-items:center;gap:1.2rem;padding:1.4rem 1.8rem;border:1px solid var(--brd);background:var(--bg3);transition:border-color .2s,background .2s;text-decoration:none}
+.ch:hover{border-color:rgba(255,77,0,.4);background:var(--sf)}
+.ch-icon{width:44px;height:44px;background:rgba(255,77,0,.1);display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0}
+.ch-label{font-family:'Rajdhani',sans-serif;font-size:.68rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--mu);margin-bottom:.2rem}
+.ch-val{font-family:'Rajdhani',sans-serif;font-size:.95rem;font-weight:700;color:var(--wh);letter-spacing:.03em}
+.ch-arr{margin-left:auto;color:var(--or);font-size:1rem;opacity:0;transition:opacity .2s,transform .2s}
+.ch:hover .ch-arr{opacity:1;transform:translateX(4px)}
+
+/* FORM SIDE */
+.contact-right{opacity:0;animation:sliR .7s ease .3s forwards}
+
+/* FORM SECTION */
+#form-section{background:var(--bg2)}
+.form-wrap{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:start}
+.lbl{font-family:'Rajdhani',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.25em;text-transform:uppercase;color:var(--or);margin-bottom:.8rem;display:flex;align-items:center;gap:.5rem}
+.lbl::before{content:'//';opacity:.5}
+.stit{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.2rem,4vw,3.6rem);letter-spacing:.03em;line-height:1;margin-bottom:.8rem}
+.form-sub{font-size:.85rem;color:var(--mu);line-height:1.8;margin-bottom:3rem}
+section{padding:6rem 5rem;position:relative}
+
+/* FORM ELEMENTS */
+.form{display:flex;flex-direction:column;gap:1.4rem}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.fg{display:flex;flex-direction:column;gap:.5rem}
+.fg label{font-family:'Rajdhani',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mu)}
+.fg input,.fg select,.fg textarea{background:var(--bg3);border:1px solid var(--brd);color:var(--wh);font-family:'Inter',sans-serif;font-size:.85rem;font-weight:300;padding:.9rem 1.2rem;outline:none;transition:border-color .2s;width:100%;cursor:none}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--or)}
+.fg select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%235A5870' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 1.2rem center}
+.fg select option{background:var(--bg3);color:var(--wh)}
+.fg textarea{resize:vertical;min-height:130px;line-height:1.7}
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 2rem;font-family:'Rajdhani',sans-serif;font-size:.88rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;cursor:none;transition:all .2s;border:none}
+.btn-f{background:var(--or);color:#fff;clip-path:polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%)}
+.btn-f:hover{background:var(--or2);transform:translateY(-2px)}
+.form-note{font-size:.72rem;color:var(--mu);line-height:1.8;margin-top:.5rem}
+
+/* WHAT HAPPENS NEXT */
+.next-steps{display:flex;flex-direction:column;gap:0;margin-top:1rem}
+.ns{display:grid;grid-template-columns:2.5rem 1fr;gap:1rem;padding:1.6rem 0;border-bottom:1px solid var(--brd)}
+.ns:last-child{border-bottom:none}
+.ns-num{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:var(--or);opacity:.5;line-height:1;padding-top:.1rem}
+.ns-t{font-family:'Rajdhani',sans-serif;font-size:.9rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;margin-bottom:.3rem}
+.ns-d{font-size:.75rem;color:var(--mu);line-height:1.75}
+
+/* MAP STRIP -->
+#location{background:var(--bg);display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--brd)}
+.loc-info{padding:5rem;display:flex;flex-direction:column;justify-content:center}
+.loc-detail{margin-top:2rem;display:flex;flex-direction:column;gap:1.5rem}
+.ld{display:flex;gap:1rem;align-items:flex-start}
+.ld-icon{font-size:1.1rem;flex-shrink:0;margin-top:.1rem}
+.ld-t{font-family:'Rajdhani',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mu);margin-bottom:.2rem}
+.ld-v{font-size:.85rem;color:rgba(240,238,248,.7);line-height:1.65}
+.map-area{background:var(--bg3);display:flex;align-items:center;justify-content:center;min-height:400px;border-left:1px solid var(--brd);position:relative;overflow:hidden}
+.map-svg{width:100%;height:100%}
+
+/* SUCCESS OVERLAY */
+.success-msg{display:none;text-align:center;padding:3rem;background:rgba(255,77,0,0.05);border:1px solid rgba(255,77,0,0.2);margin-top:1.5rem}
+.success-msg.show{display:block}
+.success-icon{font-size:3rem;margin-bottom:1rem}
+.success-title{font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:.05em;color:var(--or);margin-bottom:.5rem}
+.success-sub{font-size:.82rem;color:var(--mu);line-height:1.75}
+
+footer{background:#040406;padding:2.2rem 5rem;display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--brd)}
+.fl{display:flex;flex-direction:column;gap:.4rem}
+.ftt{font-family:'Rajdhani',sans-serif;font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--mu)}
+.flinks{display:flex;gap:2rem;list-style:none}
+.flinks a{font-family:'Rajdhani',sans-serif;font-size:.76rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--mu);text-decoration:none;transition:color .2s}
+.flinks a:hover{color:var(--or)}
+@keyframes sli{from{opacity:0;transform:translateX(-30px)}to{opacity:1;transform:translateX(0)}}
+@keyframes sliR{from{opacity:0;transform:translateX(40px)}to{opacity:1;transform:translateX(0)}}
+.rv{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}.rv.vs{opacity:1;transform:none}
+@media(max-width:1100px){nav{padding:1rem 1.5rem}.nav-links{display:none}section{padding:4rem 1.5rem}.page-hero{grid-template-columns:1fr;padding:8rem 1.5rem 3rem}.contact-right{display:none}.form-wrap{grid-template-columns:1fr}.frow{grid-template-columns:1fr}#location{grid-template-columns:1fr}.loc-info{padding:3rem 1.5rem}.map-area{display:none}footer{flex-direction:column;gap:1.5rem;text-align:center}.flinks{justify-content:center}}
+</style>
+</head>
+<body>
+<div class="cur" id="cur"></div><div class="cur-ring" id="ring"></div>
+<nav>
+  <a class="logo" href="index.html"><span>D</span>AASA</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li><li><a href="services.html">Services</a></li>
+    <li><a href="pricing.html">Pricing</a></li><li><a href="portfolio.html">Portfolio</a></li>
+    <li><a href="about.html">About</a></li><li><a href="contact.html" class="active nav-cta">Contact Us ▶</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div>
+    <div class="ph-tag">Get In Touch</div>
+    <h1 class="ph-title">LET'S BUILD<br>SOMETHING.</h1>
+    <p class="ph-desc">Whether you're a brand, creator, or broadcaster — we want to hear about your project. Drop us a message and we'll get back within 24 hours.</p>
+    <div class="ch-grid">
+      <a class="ch" href="mailto:hello@daasa.in">
+        <div class="ch-icon">📧</div>
+        <div><div class="ch-label">Email</div><div class="ch-val">hello@daasa.in</div></div>
+        <div class="ch-arr">▶</div>
+      </a>
+      <a class="ch" href="https://wa.me/919999999999" target="_blank">
+        <div class="ch-icon">💬</div>
+        <div><div class="ch-label">WhatsApp</div><div class="ch-val">+91 99999 99999</div></div>
+        <div class="ch-arr">▶</div>
+      </a>
+      <div class="ch">
+        <div class="ch-icon">📍</div>
+        <div><div class="ch-label">Location</div><div class="ch-val">Bengaluru, Karnataka, India</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="contact-right">
+    <svg viewBox="0 0 440 380" fill="none" style="width:100%;max-width:440px;filter:drop-shadow(0 0 30px rgba(255,77,0,0.15))">
+      <g opacity="0.05" stroke="white" stroke-width="1.5"><line x1="220" y1="190" x2="0" y2="0"/><line x1="220" y1="190" x2="220" y2="0"/><line x1="220" y1="190" x2="440" y2="0"/><line x1="220" y1="190" x2="0" y2="380"/><line x1="220" y1="190" x2="440" y2="380"/></g>
+      <!-- Envelope -->
+      <rect x="60" y="120" width="320" height="200" rx="12" fill="#1A1A26" stroke="#FF4D00" stroke-width="2"/>
+      <path d="M60 132 L220 230 L380 132" stroke="#FF4D00" stroke-width="2" fill="none"/>
+      <line x1="60" y1="320" x2="170" y2="210" stroke="rgba(255,77,0,0.2)" stroke-width="1"/>
+      <line x1="380" y1="320" x2="270" y2="210" stroke="rgba(255,77,0,0.2)" stroke-width="1"/>
+      <!-- Floating message bubbles -->
+      <rect x="22" y="48" width="135" height="52" rx="10" fill="#12121A" stroke="#00E5FF" stroke-width="1.2"/>
+      <polygon points="38,100 32,118 56,100" fill="#12121A" stroke="#00E5FF" stroke-width="1.2"/>
+      <text x="38" y="68" font-size="8" fill="rgba(240,238,248,0.55)" font-family="monospace">Hey Daasa! We need</text>
+      <text x="38" y="82" font-size="8" fill="rgba(240,238,248,0.55)" font-family="monospace">a Kannada brand</text>
+      <text x="38" y="96" font-size="8" fill="rgba(240,238,248,0.55)" font-family="monospace">video campaign 🔥</text>
+      <rect x="285" y="32" width="130" height="52" rx="10" fill="#FF4D00"/>
+      <polygon points="400,84 406,102 384,84" fill="#FF4D00"/>
+      <text x="298" y="52" font-size="8" fill="white" font-family="monospace">On it! Let's schedule</text>
+      <text x="298" y="66" font-size="8" fill="white" font-family="monospace">a strategy call for</text>
+      <text x="298" y="80" font-size="8" fill="white" font-family="monospace">this week ⚡</text>
+      <!-- AI badge -->
+      <rect x="168" y="48" width="100" height="38" rx="6" fill="rgba(255,77,0,0.1)" stroke="rgba(255,77,0,0.3)"/>
+      <text x="184" y="62" font-size="7" fill="#FF4D00" font-family="monospace" font-weight="bold">// DAASA AI</text>
+      <text x="184" y="76" font-size="8" fill="rgba(240,238,248,0.5)" font-family="monospace">24hr response ✓</text>
+      <!-- Sparks -->
+      <polygon points="400,168 404,180 414,176 408,186 412,198 404,191 396,198 400,186 393,176 403,180" fill="#FFE500" opacity="0.7" stroke="#FF8800" stroke-width="0.8"/>
+      <polygon points="36,200 39,209 46,207 42,214 44,223 38,218 32,223 34,214 30,207 37,209" fill="#00E5FF" opacity="0.6"/>
+    </svg>
+  </div>
+</div>
+
+<!-- FORM + NEXT STEPS -->
+<section id="form-section">
+  <div class="form-wrap rv">
+    <div>
+      <p class="lbl">Send a Message</p>
+      <h2 class="stit">TELL US ABOUT YOUR PROJECT.</h2>
+      <p class="form-sub">Fill in the form and we'll get back to you within 24 hours with a response and, if relevant, a call booking link.</p>
+
+      <form class="form" id="contactForm">
+        <div class="frow">
+          <div class="fg">
+            <label for="fname">Your Name *</label>
+            <input type="text" id="fname" name="name" placeholder="Rahul Sharma" required>
+          </div>
+          <div class="fg">
+            <label for="forg">Organisation / Brand</label>
+            <input type="text" id="forg" name="org" placeholder="Acme Corp / @creator">
+          </div>
+        </div>
+        <div class="frow">
+          <div class="fg">
+            <label for="femail">Email Address *</label>
+            <input type="email" id="femail" name="email" placeholder="you@example.com" required>
+          </div>
+          <div class="fg">
+            <label for="fphone">WhatsApp / Phone</label>
+            <input type="tel" id="fphone" name="phone" placeholder="+91 98765 43210">
+          </div>
+        </div>
+        <div class="fg">
+          <label for="fservice">What service are you interested in?</label>
+          <select id="fservice" name="service">
+            <option value="">— Select a service —</option>
+            <option>Scripting &amp; Ideation</option>
+            <option>Video Production</option>
+            <option>Post-Production / Editing</option>
+            <option>Social Media Management</option>
+            <option>Website Development</option>
+            <option>Vernacular Content (KN/TA/TE)</option>
+            <option>Freelancer Placement</option>
+            <option>Broadcast Editing</option>
+            <option>Full Subscription Plan</option>
+            <option>Not sure — need advice</option>
+          </select>
+        </div>
+        <div class="fg">
+          <label for="fbudget">Monthly budget range</label>
+          <select id="fbudget" name="budget">
+            <option value="">— Select a range —</option>
+            <option>Under ₹15,000</option>
+            <option>₹15,000 – ₹35,000 (Basic Plan)</option>
+            <option>₹35,000 – ₹70,000 (Pro Plan)</option>
+            <option>₹70,000+ (Premium / Enterprise)</option>
+            <option>One-time project</option>
+          </select>
+        </div>
+        <div class="fg">
+          <label for="fmsg">Tell us about your project *</label>
+          <textarea id="fmsg" name="message" placeholder="Tell us what you're working on, your goals, timeline, and any specific requirements — especially language (Kannada / Tamil / Telugu)..." required></textarea>
+        </div>
+        <div>
+          <button type="submit" class="btn btn-f">Send Message ▶</button>
+          <p class="form-note">We respond within 24 hours. Your details are never shared with third parties.</p>
+        </div>
+      </form>
+
+      <div class="success-msg" id="successMsg">
+        <div class="success-icon">⚡</div>
+        <div class="success-title">MESSAGE SENT!</div>
+        <p class="success-sub">Thanks for reaching out. The Daasa team will get back to you within 24 hours.<br>Check your email — we may send you a call booking link!</p>
+      </div>
+    </div>
+
+    <div>
+      <p class="lbl">What Happens Next</p>
+      <h2 class="stit">AFTER YOU HIT SEND.</h2>
+      <div class="next-steps">
+        <div class="ns">
+          <div class="ns-num">01</div>
+          <div>
+            <div class="ns-t">We Read Your Brief</div>
+            <div class="ns-d">Every message is read by a real person — not a bot. We review your project goals and service needs carefully before responding.</div>
+          </div>
+        </div>
+        <div class="ns">
+          <div class="ns-num">02</div>
+          <div>
+            <div class="ns-t">Reply Within 24 Hours</div>
+            <div class="ns-d">You'll hear from us within one business day. We may ask a few follow-up questions or send you a call booking link straight away.</div>
+          </div>
+        </div>
+        <div class="ns">
+          <div class="ns-num">03</div>
+          <div>
+            <div class="ns-t">Strategy Call (30 min)</div>
+            <div class="ns-d">A focused call to understand your content goals, audience, platform, and timeline. No obligation. No sales pitch — just a conversation.</div>
+          </div>
+        </div>
+        <div class="ns">
+          <div class="ns-num">04</div>
+          <div>
+            <div class="ns-t">Proposal &amp; Kickoff</div>
+            <div class="ns-d">We send a scoped proposal with clear deliverables and pricing. Once approved, we kick off immediately. First content in 5–7 days.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOCATION -->
+<div id="location">
+  <div class="loc-info rv">
+    <p class="lbl">Find Us</p>
+    <h2 class="stit">BASED IN<br>BENGALURU.</h2>
+    <div class="loc-detail">
+      <div class="ld">
+        <div class="ld-icon">📍</div>
+        <div><div class="ld-t">Studio Location</div><div class="ld-v">Bengaluru, Karnataka<br>India — 560 001</div></div>
+      </div>
+      <div class="ld">
+        <div class="ld-icon">📧</div>
+        <div><div class="ld-t">Email</div><div class="ld-v">hello@daasa.in</div></div>
+      </div>
+      <div class="ld">
+        <div class="ld-icon">💬</div>
+        <div><div class="ld-t">WhatsApp (preferred)</div><div class="ld-v">+91 99999 99999<br><span style="color:var(--mu);font-size:.78rem">Mon–Sat · 9 AM – 7 PM IST</span></div></div>
+      </div>
+      <div class="ld">
+        <div class="ld-icon">🌐</div>
+        <div><div class="ld-t">Languages</div><div class="ld-v">Kannada · Tamil · Telugu · English</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="map-area">
+    <svg class="map-svg" viewBox="0 0 500 400" fill="none" preserveAspectRatio="xMidYMid slice">
+      <!-- Bengaluru stylised map illustration -->
+      <rect width="500" height="400" fill="#0D0D12"/>
+      <g opacity="0.08" stroke="white" stroke-width="1">
+        <line x1="0" y1="80" x2="500" y2="80"/><line x1="0" y1="160" x2="500" y2="160"/>
+        <line x1="0" y1="240" x2="500" y2="240"/><line x1="0" y1="320" x2="500" y2="320"/>
+        <line x1="100" y1="0" x2="100" y2="400"/><line x1="200" y1="0" x2="200" y2="400"/>
+        <line x1="300" y1="0" x2="300" y2="400"/><line x1="400" y1="0" x2="400" y2="400"/>
+      </g>
+      <!-- Roads -->
+      <path d="M250 0 L250 400" stroke="rgba(255,77,0,0.12)" stroke-width="8"/>
+      <path d="M0 200 L500 200" stroke="rgba(255,77,0,0.12)" stroke-width="8"/>
+      <path d="M0 0 L500 400" stroke="rgba(255,77,0,0.07)" stroke-width="5"/>
+      <path d="M500 0 L0 400" stroke="rgba(255,77,0,0.07)" stroke-width="5"/>
+      <path d="M100 0 L400 400" stroke="rgba(255,77,0,0.05)" stroke-width="3"/>
+      <!-- Road labels -->
+      <text x="260" y="100" font-size="7" fill="rgba(255,77,0,0.3)" font-family="monospace" font-weight="bold">MG ROAD</text>
+      <text x="260" y="295" font-size="7" fill="rgba(255,77,0,0.3)" font-family="monospace">HOSUR ROAD</text>
+      <text x="40" y="195" font-size="7" fill="rgba(255,77,0,0.3)" font-family="monospace">TUMKUR RD</text>
+      <!-- City blocks -->
+      <rect x="120" y="100" width="60" height="40" rx="3" fill="rgba(26,26,38,0.8)" stroke="rgba(255,255,255,0.04)"/>
+      <rect x="200" y="90" width="40" height="55" rx="3" fill="rgba(26,26,38,0.8)" stroke="rgba(255,255,255,0.04)"/>
+      <rect x="260" y="110" width="55" height="35" rx="3" fill="rgba(26,26,38,0.8)" stroke="rgba(255,255,255,0.04)"/>
+      <rect x="120" y="220" width="70" height="45" rx="3" fill="rgba(26,26,38,0.8)" stroke="rgba(255,255,255,0.04)"/>
+      <rect x="310" y="230" width="55" height="40" rx="3" fill="rgba(26,26,38,0.8)" stroke="rgba(255,255,255,0.04)"/>
+      <rect x="140" y="280" width="80" height="35" rx="3" fill="rgba(26,26,38,0.8)" stroke="rgba(255,255,255,0.04)"/>
+      <!-- Pin -->
+      <circle cx="250" cy="200" r="40" fill="rgba(255,77,0,0.06)" stroke="rgba(255,77,0,0.15)" stroke-width="1"/>
+      <circle cx="250" cy="200" r="22" fill="rgba(255,77,0,0.1)" stroke="rgba(255,77,0,0.3)" stroke-width="1"/>
+      <circle cx="250" cy="200" r="6" fill="#FF4D00"/>
+      <line x1="250" y1="194" x2="250" y2="148" stroke="#FF4D00" stroke-width="2"/>
+      <circle cx="250" cy="145" r="14" fill="#FF4D00"/>
+      <text x="243" y="150" font-size="11" fill="white" text-anchor="middle">D</text>
+      <text x="257" y="150" font-size="11" fill="white">A</text>
+      <!-- Bengaluru label -->
+      <rect x="170" y="350" width="160" height="30" rx="4" fill="rgba(255,77,0,0.08)" stroke="rgba(255,77,0,0.2)"/>
+      <text x="210" y="370" font-family="'Bebas Neue',sans-serif" font-size="14" fill="#FF4D00" letter-spacing="3">BENGALURU</text>
+      <!-- Compass -->
+      <text x="450" y="45" font-size="11" fill="rgba(255,77,0,0.45)" font-family="monospace" font-weight="bold">N</text>
+      <line x1="455" y1="50" x2="455" y2="75" stroke="rgba(255,77,0,0.3)" stroke-width="1"/>
+      <polygon points="455,50 451,62 455,58 459,62" fill="rgba(255,77,0,0.45)"/>
+    </svg>
+  </div>
+</div>
+
+<footer>
+  <div class="fl"><a class="logo" href="index.html"><span>D</span>AASA</a><p class="ftt">AI-Powered Vernacular Content Studio · Bengaluru · Est. 2026</p></div>
+  <ul class="flinks"><li><a href="services.html">Services</a></li><li><a href="pricing.html">Pricing</a></li><li><a href="portfolio.html">Portfolio</a></li><li><a href="about.html">About</a></li><li><a href="contact.html">Contact</a></li></ul>
+</footer>
+
+<script>
+const cur=document.getElementById('cur'),ring=document.getElementById('ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
+(function loop(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(loop);})();
+document.querySelectorAll('a,button').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cur.style.width='20px';cur.style.height='20px';ring.style.width='54px';ring.style.height='54px';});
+  el.addEventListener('mouseleave',()=>{cur.style.width='12px';cur.style.height='12px';ring.style.width='36px';ring.style.height='36px';});
+});
+const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('vs');}),{threshold:.08});
+document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
+
+// Form submit
+document.getElementById('contactForm').addEventListener('submit',function(e){
+  e.preventDefault();
+  this.style.display='none';
+  document.getElementById('successMsg').classList.add('show');
+  window.scrollTo({top:document.getElementById('form-section').offsetTop-80,behavior:'smooth'});
+});
+</script>
+</body></html>
