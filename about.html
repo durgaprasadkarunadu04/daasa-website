@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About — Daasa Studio</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;600;700&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#07070A;--bg2:#0D0D12;--bg3:#12121A;--sf:#1A1A26;--brd:rgba(255,255,255,0.07);--or:#FF4D00;--or2:#FF6B2B;--cy:#00E5FF;--ye:#FFE500;--wh:#F0EEF8;--mu:#5A5870}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--wh);font-family:'Inter',sans-serif;font-weight:300;overflow-x:hidden;cursor:none}
+.cur{position:fixed;width:12px;height:12px;background:var(--or);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);mix-blend-mode:screen;transition:width .2s,height .2s}
+.cur-ring{position:fixed;width:36px;height:36px;border:1px solid rgba(255,77,0,.5);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .3s,height .3s}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1.2rem 5rem;border-bottom:1px solid var(--brd);background:rgba(7,7,10,.94);backdrop-filter:blur(20px)}
+.logo{font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:.1em;color:var(--wh);text-decoration:none;position:relative}
+.logo::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--or)}
+.logo span{color:var(--or)}
+.nav-links{display:flex;gap:1.8rem;list-style:none;align-items:center}
+.nav-links a{font-family:'Rajdhani',sans-serif;font-size:.85rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mu);text-decoration:none;transition:color .2s;position:relative}
+.nav-links a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:1px;background:var(--or);transition:width .2s}
+.nav-links a:hover{color:var(--wh)}.nav-links a:hover::after{width:100%}
+.nav-links a.active{color:var(--or)}.nav-links a.active::after{width:100%}
+.nav-cta{background:var(--or)!important;color:#fff!important;padding:.5rem 1.4rem!important;clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);font-weight:700!important}
+.nav-cta::after{display:none!important}
+section{padding:6rem 5rem;position:relative}
+.lbl{font-family:'Rajdhani',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.25em;text-transform:uppercase;color:var(--or);margin-bottom:.8rem;display:flex;align-items:center;gap:.5rem}
+.lbl::before{content:'//';opacity:.5}
+.stit{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.2rem,4vw,3.6rem);letter-spacing:.03em;line-height:1;margin-bottom:1.5rem}
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 2rem;font-family:'Rajdhani',sans-serif;font-size:.88rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;cursor:none;transition:all .2s;border:none}
+.btn-f{background:var(--or);color:#fff;clip-path:polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%)}
+.btn-f:hover{background:var(--or2);transform:translateY(-2px)}
+.btn-w{background:#fff;color:var(--or);clip-path:polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%)}
+.btn-w:hover{background:#f0efe8}
+/* FOUNDER HERO */
+.page-hero{padding:10rem 5rem 6rem;position:relative;overflow:hidden;border-bottom:1px solid var(--brd);display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+.page-hero-bg{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 60% 80% at 80% 50%,rgba(255,77,0,.07) 0%,transparent 70%)}
+.ph-tag{display:inline-flex;align-items:center;gap:.5rem;background:rgba(255,77,0,.12);border:1px solid rgba(255,77,0,.3);padding:.4rem 1rem;font-family:'Rajdhani',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--or);margin-bottom:1.5rem;clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%);opacity:0;animation:sli .5s ease .1s forwards}
+.ph-tag::before{content:'//';opacity:.5}
+.ph-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(3rem,7vw,6rem);letter-spacing:.02em;line-height:.9;margin-bottom:1.2rem;opacity:0;animation:sli .5s ease .2s forwards}
+.ph-desc{font-size:.93rem;line-height:1.9;color:rgba(240,238,248,.5);margin-bottom:2rem;opacity:0;animation:sli .5s ease .35s forwards}
+.ph-chips{display:flex;flex-wrap:wrap;gap:.5rem;opacity:0;animation:sli .5s ease .5s forwards}
+.chip{border:1px solid var(--brd);padding:.32rem .85rem;font-family:'Rajdhani',sans-serif;font-size:.7rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--mu);clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%)}
+.ph-right{display:flex;justify-content:center;opacity:0;animation:sliR .7s ease .3s forwards}
+.founder-card{width:300px;background:var(--bg3);border:1px solid var(--brd);overflow:hidden}
+.fc-svg{width:100%;display:block}
+.fc-plate{padding:1.4rem 1.8rem;border-top:1px solid var(--brd);background:var(--sf)}
+.fc-name{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:.05em;line-height:1.1;margin-bottom:.2rem}
+.fc-role{font-family:'Rajdhani',sans-serif;font-size:.68rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--or)}
+/* STORY */
+#story{background:var(--bg2);display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:start}
+.story-body p{font-size:.9rem;line-height:1.95;color:rgba(240,238,248,.5);margin-bottom:1.4rem}
+.story-body p strong{color:var(--wh);font-weight:400}
+.story-numbers{display:flex;flex-direction:column;gap:0;border:1px solid var(--brd);align-self:start;margin-top:1rem}
+.sn{padding:2rem;border-bottom:1px solid var(--brd);transition:background .2s}
+.sn:hover{background:var(--bg3)}.sn:last-child{border-bottom:none}
+.sn-n{font-family:'Bebas Neue',sans-serif;font-size:2.8rem;color:var(--or);line-height:1;margin-bottom:.3rem}
+.sn-l{font-size:.78rem;color:var(--mu)}
+/* VALUES */
+#values{background:var(--bg)}
+.vgrid{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--brd);margin-top:3rem}
+.vcard{padding:3rem 2.5rem;border-right:1px solid var(--brd);transition:background .2s}
+.vcard:hover{background:var(--bg3)}.vcard:last-child{border-right:none}
+.v-icon{font-size:2rem;margin-bottom:1.2rem}
+.v-title{font-family:'Rajdhani',sans-serif;font-size:1rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:.7rem}
+.v-desc{font-size:.78rem;color:var(--mu);line-height:1.8}
+/* TEAM -->
+#team{background:var(--bg2)}
+.tgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin-top:3rem}
+.tmember{background:var(--bg3);transition:background .2s}
+.tmember:hover{background:var(--sf)}
+.tm-svg{width:100%;display:block}
+.tm-info{padding:1.5rem}
+.tm-name{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:.04em;margin-bottom:.2rem}
+.tm-role{font-family:'Rajdhani',sans-serif;font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--or);margin-bottom:.6rem}
+.tm-desc{font-size:.73rem;color:var(--mu);line-height:1.7}
+/* CTA -->
+#cta-band{background:var(--or);padding:5rem;display:flex;justify-content:space-between;align-items:center;gap:2rem}
+.cta-band-t{font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,4vw,3.5rem);letter-spacing:.03em;line-height:1;color:#fff}
+footer{background:#040406;padding:2.2rem 5rem;display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--brd)}
+.fl{display:flex;flex-direction:column;gap:.4rem}
+.ftt{font-family:'Rajdhani',sans-serif;font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--mu)}
+.flinks{display:flex;gap:2rem;list-style:none}
+.flinks a{font-family:'Rajdhani',sans-serif;font-size:.76rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--mu);text-decoration:none;transition:color .2s}
+.flinks a:hover{color:var(--or)}
+@keyframes sli{from{opacity:0;transform:translateX(-30px)}to{opacity:1;transform:translateX(0)}}
+@keyframes sliR{from{opacity:0;transform:translateX(40px)}to{opacity:1;transform:translateX(0)}}
+@keyframes flt{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.rv{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}.rv.vs{opacity:1;transform:none}
+@media(max-width:1100px){nav{padding:1rem 1.5rem}.nav-links{display:none}section{padding:4rem 1.5rem}.page-hero{grid-template-columns:1fr;padding:8rem 1.5rem 3rem}.ph-right{display:none}#story{grid-template-columns:1fr}.vgrid{grid-template-columns:1fr}.vcard{border-right:none!important}.tgrid{grid-template-columns:1fr 1fr}#cta-band{flex-direction:column;padding:3rem 1.5rem}footer{flex-direction:column;gap:1.5rem;text-align:center}.flinks{justify-content:center}}
+</style>
+</head>
+<body>
+<div class="cur" id="cur"></div><div class="cur-ring" id="ring"></div>
+<nav>
+  <a class="logo" href="index.html"><span>D</span>AASA</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li><li><a href="services.html">Services</a></li>
+    <li><a href="pricing.html">Pricing</a></li><li><a href="portfolio.html">Portfolio</a></li>
+    <li><a href="about.html" class="active">About</a></li><li><a href="contact.html" class="nav-cta">Contact Us ▶</a></li>
+  </ul>
+</nav>
+
+<div class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div>
+    <div class="ph-tag">The Studio Behind The Content</div>
+    <h1 class="ph-title">BUILT IN BENGALURU.<br>FOR SOUTH INDIA.</h1>
+    <p class="ph-desc">Daasa was built from a frustration anyone in South India's creator economy will recognise — brilliant ideas, zero professional support. We built the studio that should have existed years ago.</p>
+    <div class="ph-chips">
+      <span class="chip">Bengaluru, India</span><span class="chip">AI-Powered</span>
+      <span class="chip">Vernacular-First</span><span class="chip">Est. 2026</span>
+    </div>
+  </div>
+  <div class="ph-right">
+    <div class="founder-card">
+      <svg class="fc-svg" viewBox="0 0 290 340" fill="none">
+        <rect width="290" height="340" fill="#0D0D12"/>
+        <g opacity="0.04" stroke="white" stroke-width="2"><line x1="145" y1="170" x2="0" y2="0"/><line x1="145" y1="170" x2="145" y2="0"/><line x1="145" y1="170" x2="290" y2="0"/><line x1="145" y1="170" x2="0" y2="340"/><line x1="145" y1="170" x2="290" y2="340"/></g>
+        <ellipse cx="145" cy="275" rx="100" ry="28" fill="rgba(255,77,0,0.08)"/>
+        <rect x="85" y="235" width="120" height="105" rx="6" fill="#1A1A26"/>
+        <path d="M145 244 L112 265 L112 340 L85 340 L85 235 Q116 229 145 244Z" fill="#12121A"/>
+        <path d="M145 244 L178 265 L178 340 L205 340 L205 235 Q174 229 145 244Z" fill="#12121A"/>
+        <path d="M145 246 L138 275 L145 328 L152 275 Z" fill="#FF4D00"/>
+        <path d="M130 244 L145 260 L160 244" stroke="white" stroke-width="1.5" fill="none"/>
+        <rect x="55" y="242" width="36" height="90" rx="8" fill="#12121A"/>
+        <rect x="199" y="242" width="36" height="90" rx="8" fill="#12121A"/>
+        <ellipse cx="73" cy="336" rx="17" ry="11" fill="#FFCBA4"/>
+        <ellipse cx="217" cy="336" rx="17" ry="11" fill="#FFCBA4"/>
+        <rect x="55" y="318" width="36" height="9" rx="4" fill="#FF4D00" opacity="0.45"/>
+        <rect x="199" y="318" width="36" height="9" rx="4" fill="#FF4D00" opacity="0.45"/>
+        <ellipse cx="145" cy="168" rx="56" ry="60" fill="#FFCBA4"/>
+        <path d="M89 155 Q93 108 112 113 Q107 93 125 100 Q122 84 135 92 Q140 76 151 86 Q159 74 162 90 Q175 87 169 108 Q187 104 180 130" fill="#1A0A28"/>
+        <path d="M89 168 Q77 180 81 196" stroke="#1A0A28" stroke-width="7" stroke-linecap="round" fill="none"/>
+        <path d="M201 168 Q213 180 209 196" stroke="#1A0A28" stroke-width="7" stroke-linecap="round" fill="none"/>
+        <ellipse cx="126" cy="167" rx="12" ry="13" fill="white"/>
+        <ellipse cx="164" cy="167" rx="12" ry="13" fill="white"/>
+        <ellipse cx="127" cy="168" rx="8" ry="9" fill="#1A0A18"/>
+        <ellipse cx="165" cy="168" rx="8" ry="9" fill="#1A0A18"/>
+        <ellipse cx="130" cy="164" rx="3.5" ry="4" fill="white"/>
+        <ellipse cx="168" cy="164" rx="3.5" ry="4" fill="white"/>
+        <path d="M114 155 Q126 149 138 154" stroke="#1A0A28" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+        <path d="M152 154 Q164 149 176 155" stroke="#1A0A28" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+        <path d="M129 190 Q145 200 161 190" stroke="#CC8866" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+        <path d="M113 168 Q126 161 139 168 Q126 175 113 168Z" fill="none" stroke="rgba(255,77,0,0.4)" stroke-width="1.5"/>
+        <path d="M151 168 Q164 161 177 168 Q164 175 151 168Z" fill="none" stroke="rgba(255,77,0,0.4)" stroke-width="1.5"/>
+        <line x1="139" y1="168" x2="151" y2="168" stroke="rgba(255,77,0,0.4)" stroke-width="1.5"/>
+        <rect x="55" y="276" width="180" height="44" rx="4" fill="rgba(255,77,0,0.1)" stroke="#FF4D00" stroke-width="1"/>
+        <text x="70" y="294" font-family="'Bebas Neue',sans-serif" font-size="13" fill="#FF4D00" letter-spacing="1">DURGAPRASAD</text>
+        <text x="70" y="312" font-family="'Bebas Neue',sans-serif" font-size="13" fill="rgba(240,238,248,0.7)" letter-spacing="1">KARUNADU</text>
+        <path d="M10 10 L10 28 L28 28" stroke="#FF4D00" stroke-width="1.5" fill="none" opacity="0.4"/>
+        <path d="M280 10 L280 28 L262 28" stroke="#FF4D00" stroke-width="1.5" fill="none" opacity="0.4"/>
+        <path d="M10 330 L10 312 L28 312" stroke="#FF4D00" stroke-width="1.5" fill="none" opacity="0.4"/>
+        <path d="M280 330 L280 312 L262 312" stroke="#FF4D00" stroke-width="1.5" fill="none" opacity="0.4"/>
+      </svg>
+      <div class="fc-plate">
+        <div class="fc-name">Durgaprasad Karunadu</div>
+        <div class="fc-role">// Founder &amp; CEO</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- STORY -->
+<section id="story">
+  <div class="rv">
+    <p class="lbl">Our Story</p>
+    <h2 class="stit">WHY DAASA EXISTS.</h2>
+    <div class="story-body">
+      <p>South India has <strong>600 million+ vernacular language speakers</strong>. Kannada. Tamil. Telugu. Brilliant creators, emerging brands, and growing businesses — all producing content. And almost none of them had access to a studio that truly understood their language, culture, and ambitions.</p>
+      <p>Durgaprasad Karunadu saw this gap firsthand. The existing options were expensive agencies that treated vernacular content as an afterthought, or individual freelancers with no reliability or consistency.</p>
+      <p>Daasa was the answer: <strong>a full-stack content studio built natively for South India</strong>, powered by AI to bring down cost without compromising quality, and staffed by people who live and breathe Kannada, Tamil, and Telugu content.</p>
+      <p>We launched in Bengaluru in 2026. Broadcast contracts. Startup subscriptions. Creator partnerships. Every project teaches us something. Every delivery makes us faster. We're just getting started.</p>
+    </div>
+  </div>
+  <div class="rv">
+    <div class="story-numbers">
+      <div class="sn"><div class="sn-n">2026</div><div class="sn-l">Founded in Bengaluru, Karnataka</div></div>
+      <div class="sn"><div class="sn-n">8+</div><div class="sn-l">Services across the content lifecycle</div></div>
+      <div class="sn"><div class="sn-n">3</div><div class="sn-l">Languages: Kannada, Tamil, Telugu</div></div>
+      <div class="sn"><div class="sn-n">3</div><div class="sn-l">Broadcast channel contracts signed</div></div>
+      <div class="sn"><div class="sn-n">AI</div><div class="sn-l">Embedded at every step of production</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- VALUES -->
+<section id="values">
+  <div class="rv"><p class="lbl">What We Stand For</p><h2 class="stit">OUR VALUES.</h2></div>
+  <div class="vgrid rv">
+    <div class="vcard">
+      <div class="v-icon">⚡</div>
+      <div class="v-title">AI-First, Human-Checked</div>
+      <p class="v-desc">We use AI to work faster and smarter, but every deliverable is reviewed by a human who cares about the craft. Speed doesn't mean shortcuts.</p>
+    </div>
+    <div class="vcard">
+      <div class="v-icon">🗣️</div>
+      <div class="v-title">Vernacular is the Default</div>
+      <p class="v-desc">We don't translate. We originate. Our scripts, our sensibility, and our cultural reference points start in Kannada, Tamil, and Telugu — not in English and adapted.</p>
+    </div>
+    <div class="vcard">
+      <div class="v-icon">🤝</div>
+      <div class="v-title">Clients as Partners</div>
+      <p class="v-desc">Your content goals are ours. We take ownership of outcomes, not just deliverables. If something isn't working, we say so and fix it.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section id="team">
+  <div class="rv"><p class="lbl">The Team</p><h2 class="stit">THE PEOPLE BEHIND DAASA.</h2></div>
+  <div class="tgrid rv">
+
+    <div class="tmember">
+      <svg class="tm-svg" viewBox="0 0 240 200" fill="none">
+        <rect width="240" height="200" fill="#0D0D12"/>
+        <g opacity="0.04" stroke="white" stroke-width="1.5"><line x1="120" y1="100" x2="0" y2="0"/><line x1="120" y1="100" x2="240" y2="0"/><line x1="120" y1="100" x2="0" y2="200"/><line x1="120" y1="100" x2="240" y2="200"/></g>
+        <ellipse cx="120" cy="175" rx="70" ry="16" fill="rgba(255,77,0,0.08)"/>
+        <rect x="95" y="118" width="50" height="65" rx="5" fill="#FF4D00"/>
+        <path d="M95 128 Q72 118 66 105" stroke="#FF4D00" stroke-width="14" stroke-linecap="round" fill="none"/>
+        <path d="M145 128 Q168 118 174 105" stroke="#FF4D00" stroke-width="14" stroke-linecap="round" fill="none"/>
+        <ellipse cx="120" cy="100" rx="30" ry="32" fill="#FFCBA4"/>
+        <path d="M90 90 Q92 65 105 70 Q102 56 113 62 Q117 52 124 58 Q130 50 133 62 Q142 58 138 74" fill="#1A0A28"/>
+        <ellipse cx="109" cy="100" rx="8" ry="9" fill="white"/>
+        <ellipse cx="131" cy="100" rx="8" ry="9" fill="white"/>
+        <ellipse cx="110" cy="101" rx="5" ry="6" fill="#1A0A18"/>
+        <ellipse cx="132" cy="101" rx="5" ry="6" fill="#1A0A18"/>
+        <ellipse cx="112" cy="98" rx="2" ry="2.5" fill="white"/>
+        <ellipse cx="134" cy="98" rx="2" ry="2.5" fill="white"/>
+        <path d="M102 89 Q110 85 118 89" stroke="#1A0A28" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+        <path d="M122 89 Q130 85 138 89" stroke="#1A0A28" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+        <path d="M113 112 Q120 118 127 112" stroke="#CC8866" stroke-width="2" fill="none" stroke-linecap="round"/>
+      </svg>
+      <div class="tm-info">
+        <div class="tm-name">Durgaprasad K.</div>
+        <div class="tm-role">Founder &amp; CEO</div>
+        <p class="tm-desc">Visionary behind Daasa. Strategy, client relations, and product direction.</p>
+      </div>
+    </div>
+
+    <div class="tmember">
+      <svg class="tm-svg" viewBox="0 0 240 200" fill="none">
+        <rect width="240" height="200" fill="#0D0D12"/>
+        <g opacity="0.04" stroke="white" stroke-width="1.5"><line x1="120" y1="100" x2="0" y2="0"/><line x1="120" y1="100" x2="240" y2="0"/><line x1="120" y1="100" x2="0" y2="200"/><line x1="120" y1="100" x2="240" y2="200"/></g>
+        <ellipse cx="120" cy="175" rx="70" ry="16" fill="rgba(0,229,255,0.06)"/>
+        <rect x="95" y="118" width="50" height="65" rx="5" fill="#1A1A26" stroke="#00E5FF" stroke-width="1.5"/>
+        <path d="M95 128 Q72 118 66 105" stroke="#1A1A26" stroke-width="14" stroke-linecap="round" fill="none"/>
+        <path d="M145 128 Q168 118 174 105" stroke="#1A1A26" stroke-width="14" stroke-linecap="round" fill="none"/>
+        <ellipse cx="120" cy="100" rx="30" ry="32" fill="#FFCBA4"/>
+        <path d="M90 90 Q93 68 108 72 Q103 57 117 63 Q121 52 125 61 Q132 54 135 68 Q145 64 140 80" fill="#2A1A10"/>
+        <ellipse cx="109" cy="100" rx="8" ry="9" fill="white"/>
+        <ellipse cx="131" cy="100" rx="8" ry="9" fill="white"/>
+        <ellipse cx="110" cy="101" rx="5" ry="6" fill="#1A1010"/>
+        <ellipse cx="132" cy="101" rx="5" ry="6" fill="#1A1010"/>
+        <ellipse cx="112" cy="98" rx="2" ry="2.5" fill="white"/>
+        <ellipse cx="134" cy="98" rx="2" ry="2.5" fill="white"/>
+        <path d="M102 89 Q110 85 118 89" stroke="#2A1A10" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+        <path d="M122 89 Q130 85 138 89" stroke="#2A1A10" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+        <path d="M113 112 Q120 118 127 112" stroke="#CC8866" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <!-- Camera icon on chest -->
+        <rect x="104" y="133" width="32" height="22" rx="3" fill="#0A0A14" stroke="#00E5FF" stroke-width="1"/>
+        <circle cx="120" cy="144" r="7" fill="#00E5FF" opacity="0.3" stroke="#00E5FF"/>
+      </svg>
+      <div class="tm-info">
+        <div class="tm-name">Creative Director</div>
+        <div class="tm-role">Video &amp; Production</div>
+        <p class="tm-desc">Leads all video production, shoot coordination, and creative vision.</p>
+      </div>
+    </div>
+
+    <div class="tmember">
+      <svg class="tm-svg" viewBox="0 0 240 200" fill="none">
+        <rect width="240" height="200" fill="#0D0D12"/>
+        <g opacity="0.04" stroke="white" stroke-width="1.5"><line x1="120" y1="100" x2="0" y2="0"/><line x1="120" y1="100" x2="240" y2="0"/><line x1="120" y1="100" x2="0" y2="200"/><line x1="120" y1="100" x2="240" y2="200"/></g>
+        <ellipse cx="120" cy="175" rx="70" ry="16" fill="rgba(255,229,0,0.06)"/>
+        <rect x="95" y="118" width="50" height="65" rx="5" fill="#1A1A26" stroke="#FFE500" stroke-width="1.5"/>
+        <path d="M95 128 Q72 118 66 105" stroke="#1A1A26" stroke-width="14" stroke-linecap="round" fill="none"/>
+        <path d="M145 128 Q168 118 174 105" stroke="#1A1A26" stroke-width="14" stroke-linecap="round" fill="none"/>
+        <ellipse cx="120" cy="100" rx="30" ry="32" fill="#FFCBA4"/>
+        <path d="M90 88 Q92 66 106 70 Q101 55 114 61 Q118 51 122 59 Q129 52 132 65 Q142 61 138 77" fill="#100A1A"/>
+        <ellipse cx="109" cy="100" rx="8" ry="9" fill="white"/>
+        <ellipse cx="131" cy="100" rx="8" ry="9" fill="white"/>
+        <ellipse cx="110" cy="101" rx="5" ry="6" fill="#100818"/>
+        <ellipse cx="132" cy="101" rx="5" ry="6" fill="#100818"/>
+        <ellipse cx="112" cy="98" rx="2" ry="2.5" fill="white"/>
+        <ellipse cx="134" cy="98" rx="2" ry="2.5" fill="white"/>
+        <path d="M102 89 Q110 85 118 89" stroke="#100A1A" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+        <path d="M122 89 Q130 85 138 89" stroke="#100A1A" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+        <path d="M113 112 Q120 118 127 112" stroke="#CC8866" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <!-- Pen on chest -->
+        <rect x="108" y="130" width="24" height="26" rx="3" fill="#0A0A14" stroke="#FFE500" stroke-width="1"/>
+        <line x1="116" y1="136" x2="116" y2="150" stroke="#FFE500" stroke-width="1.2" stroke-dasharray="2,2"/>
+        <line x1="122" y1="136" x2="122" y2="150" stroke="#FFE500" stroke-width="1.2" stroke-dasharray="2,2"/>
+        <line x1="128" y1="136" x2="128" y2="150" stroke="#FFE500" stroke-width="1.2" stroke-dasharray="2,2"/>
+      </svg>
+      <div class="tm-info">
+        <div class="tm-name">Content Strategist</div>
+        <div class="tm-role">Script &amp; Social</div>
+        <p class="tm-desc">Scripting, editorial strategy, and social media content across all platforms.</p>
+      </div>
+    </div>
+
+    <div class="tmember">
+      <svg class="tm-svg" viewBox="0 0 240 200" fill="none">
+        <rect width="240" height="200" fill="#0D0D12"/>
+        <g opacity="0.04" stroke="white" stroke-width="1.5"><line x1="120" y1="100" x2="0" y2="0"/><line x1="120" y1="100" x2="240" y2="0"/><line x1="120" y1="100" x2="0" y2="200"/><line x1="120" y1="100" x2="240" y2="200"/></g>
+        <ellipse cx="120" cy="175" rx="70" ry="16" fill="rgba(255,77,0,0.06)"/>
+        <rect x="95" y="118" width="50" height="65" rx="5" fill="#1A1A26" stroke="#FF4D00" stroke-width="1.5"/>
+        <path d="M95 128 Q72 118 66 105" stroke="#1A1A26" stroke-width="14" stroke-linecap="round" fill="none"/>
+        <path d="M145 128 Q168 118 174 105" stroke="#1A1A26" stroke-width="14" stroke-linecap="round" fill="none"/>
+        <ellipse cx="120" cy="100" rx="30" ry="32" fill="#FFCBA4"/>
+        <path d="M90 90 Q93 68 107 72 Q102 57 115 63 Q119 52 123 61 Q130 53 133 67 Q143 63 139 79" fill="#1A0818"/>
+        <ellipse cx="109" cy="100" rx="8" ry="9" fill="white"/>
+        <ellipse cx="131" cy="100" rx="8" ry="9" fill="white"/>
+        <ellipse cx="110" cy="101" rx="5" ry="6" fill="#180818"/>
+        <ellipse cx="132" cy="101" rx="5" ry="6" fill="#180818"/>
+        <ellipse cx="112" cy="98" rx="2" ry="2.5" fill="white"/>
+        <ellipse cx="134" cy="98" rx="2" ry="2.5" fill="white"/>
+        <path d="M102 89 Q110 85 118 89" stroke="#180818" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+        <path d="M122 89 Q130 85 138 89" stroke="#180818" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+        <path d="M113 112 Q120 118 127 112" stroke="#CC8866" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <!-- Edit icon -->
+        <rect x="104" y="130" width="32" height="22" rx="3" fill="#0A0A14" stroke="#FF4D00" stroke-width="1"/>
+        <line x1="109" y1="144" x2="135" y2="133" stroke="#FF4D00" stroke-width="1" opacity="0.5"/>
+        <line x1="109" y1="138" x2="135" y2="148" stroke="#00E5FF" stroke-width="1" opacity="0.4"/>
+      </svg>
+      <div class="tm-info">
+        <div class="tm-name">Lead Editor</div>
+        <div class="tm-role">Post-Production</div>
+        <p class="tm-desc">Head of post-production, colour grading, and AI-assisted editing workflows.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div id="cta-band">
+  <div class="cta-band-t">JOIN THE DAASA NETWORK.</div>
+  <a href="contact.html" class="btn btn-w">Work With Us ▶</a>
+</div>
+
+<footer>
+  <div class="fl"><a class="logo" href="index.html"><span>D</span>AASA</a><p class="ftt">AI-Powered Vernacular Content Studio · Bengaluru · Est. 2026</p></div>
+  <ul class="flinks"><li><a href="services.html">Services</a></li><li><a href="pricing.html">Pricing</a></li><li><a href="portfolio.html">Portfolio</a></li><li><a href="about.html">About</a></li><li><a href="contact.html">Contact</a></li></ul>
+</footer>
+<script>
+const cur=document.getElementById('cur'),ring=document.getElementById('ring');let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
+(function loop(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(loop);})();
+document.querySelectorAll('a,button').forEach(el=>{el.addEventListener('mouseenter',()=>{cur.style.width='20px';cur.style.height='20px';ring.style.width='54px';ring.style.height='54px';});el.addEventListener('mouseleave',()=>{cur.style.width='12px';cur.style.height='12px';ring.style.width='36px';ring.style.height='36px';});});
+const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('vs');}),{threshold:.08});
+document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
+</script>
+</body></html>
