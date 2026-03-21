@@ -319,7 +319,7 @@ document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
 function openModal(){document.getElementById('modalOverlay').classList.add('open');document.body.style.overflow='hidden';}
 function closeModal(){document.getElementById('modalOverlay').classList.remove('open');document.body.style.overflow='';}
 function closeModalOut(e){if(e.target===document.getElementById('modalOverlay'))closeModal();}
-document.getElementById('gitForm').addEventListener('submit',function(e){e.preventDefault();this.style.display='none';document.getElementById('modalSuccess').classList.add('show');setTimeout(()=>{closeModal();this.style.display='flex';document.getElementById('modalSuccess').classList.remove('show');this.reset();},2800);});
+
 function toggleFaq(btn){const a=btn.nextElementSibling;const isOpen=a.classList.contains('open');document.querySelectorAll('.faq-q').forEach(b=>{b.classList.remove('open');b.nextElementSibling.classList.remove('open');});if(!isOpen){btn.classList.add('open');a.classList.add('open');}}
 </script>
 </body></html>
