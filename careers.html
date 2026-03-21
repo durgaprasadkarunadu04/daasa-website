@@ -163,7 +163,7 @@ footer{background:#040406;padding:3rem 5rem;border-top:1px solid var(--brd)}
 <section id="apply" style="background:var(--bg2)">
   <div class="rv" style="text-align:center;max-width:600px;margin:0 auto 3rem"><p class="lbl" style="justify-content:center">Apply Now</p><h2 class="stit">SEND US YOUR DETAILS.</h2><p style="font-size:.87rem;color:rgba(240,238,248,.45);line-height:1.85">Fill in the form below and we'll get back to you within 48 hours. Attach your portfolio link or reel if you have one.</p></div>
   <div class="apply-form rv">
-    <form id="applyForm" style="display:flex;flex-direction:column;gap:1.1rem">
+    <form id="applyForm" action="https://formspree.io/f/xjgazqlw" method="POST" style="display:flex;flex-direction:column;gap:1.1rem">
       <div class="apply-form-row">
         <div class="fg"><label>Full Name *</label><input type="text" placeholder="Your Name" required></div>
         <div class="fg"><label>Phone Number *</label><input type="tel" placeholder="+91 98765 43210" required></div>
@@ -217,7 +217,7 @@ if(af)af.addEventListener('submit',function(e){e.preventDefault();this.style.dis
   <div class="modal">
     <div class="modal-head"><div class="modal-tag">// Let's Talk</div><div class="modal-title">GET IN TOUCH</div><button class="modal-close" onclick="closeModal()">✕</button></div>
     <div class="modal-body">
-      <form class="mform" id="gitForm">
+      <form class="mform" id="gitForm" action="https://formspree.io/f/xjgazqlw" method="POST"><input type="hidden" name="_subject" value="New Daasa Enquiry"><input type="hidden" name="_next" value="https://durgaprasadkarunadu04.github.io/daasa-website/thankyou.html">
         <div class="mform-row">
           <div class="fg"><label>Full Name *</label><input type="text" placeholder="Rahul Sharma" required></div>
           <div class="fg"><label>Phone Number *</label><input type="tel" placeholder="+91 98765 43210" required></div>
