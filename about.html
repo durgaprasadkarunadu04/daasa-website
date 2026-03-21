@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>About — Daasa Studio</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>:root{--bg:#07070A;--bg2:#0D0D12;--bg3:#12121A;--sf:#1A1A26;--brd:rgba(255,255,255,0.07);--or:#FF4D00;--or2:#FF6B2B;--cy:#00E5FF;--ye:#FFE500;--wh:#F0EEF8;--mu:#5A5870}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--wh);font-family:'Inter',sans-serif;font-weight:300;overflow-x:hidden}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;justify-content:space-between;align-items:center;padding:1.1rem 5rem;border-bottom:1px solid var(--brd);background:rgba(7,7,10,.96);backdrop-filter:blur(20px);transition:padding .3s}
+.logo{font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:.1em;color:var(--wh);text-decoration:none;position:relative}
+.logo::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--or)}
+.logo span{color:var(--or)}
+.nav-links{display:flex;gap:1.5rem;list-style:none;align-items:center}
+.nav-links a{font-family:'Rajdhani',sans-serif;font-size:.82rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mu);text-decoration:none;transition:color .2s;position:relative}
+.nav-links a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:1px;background:var(--or);transition:width .2s}
+.nav-links a:hover,.nav-links a.active{color:var(--wh)}
+.nav-links a:hover::after,.nav-links a.active::after{width:100%}
+.nav-links a.active{color:var(--or)}
+.nav-cta{background:var(--or)!important;color:#fff!important;padding:.45rem 1.1rem!important;clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%)}
+.nav-cta::after{display:none!important}
+.hamburger{display:none;background:none;border:1px solid var(--brd);color:var(--wh);font-size:1.3rem;padding:.3rem .7rem;cursor:pointer}
+section{padding:6rem 5rem;position:relative}
+.lbl{font-family:'Rajdhani',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.25em;text-transform:uppercase;color:var(--or);margin-bottom:.8rem;display:flex;align-items:center;gap:.5rem}
+.lbl::before{content:'//';opacity:.5}
+.stit{font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,4vw,3.4rem);letter-spacing:.03em;line-height:1;margin-bottom:1.5rem}
+.page-hero{padding:10rem 5rem 5rem;position:relative;overflow:hidden;border-bottom:1px solid var(--brd)}
+.page-hero-bg{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 60% 80% at 80% 50%,rgba(255,77,0,.07) 0%,transparent 70%)}
+.ph-tag{display:inline-flex;align-items:center;gap:.5rem;background:rgba(255,77,0,.12);border:1px solid rgba(255,77,0,.3);padding:.4rem 1rem;font-family:'Rajdhani',sans-serif;font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--or);margin-bottom:1.5rem;clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%);opacity:0;animation:sli .5s ease .1s forwards}
+.ph-tag::before{content:'//';opacity:.5}
+.ph-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(3rem,7vw,6.5rem);letter-spacing:.02em;line-height:.9;margin-bottom:1.2rem;opacity:0;animation:sli .5s ease .2s forwards}
+.ph-desc{font-size:.92rem;line-height:1.85;color:rgba(240,238,248,.5);max-width:580px;opacity:0;animation:sli .5s ease .35s forwards}
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.8rem 1.8rem;font-family:'Rajdhani',sans-serif;font-size:.86rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;transition:all .2s;border:none;cursor:pointer}
+.btn-f{background:var(--or);color:#fff;clip-path:polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%)}
+.btn-f:hover{background:var(--or2);transform:translateY(-2px)}
+.btn-g{background:transparent;color:rgba(240,238,248,.6);border:1px solid var(--brd);clip-path:polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%)}
+.btn-g:hover{border-color:var(--or);color:var(--or)}
+.btn-dark{background:#fff;color:var(--or);clip-path:polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%)}
+.btn-dark:hover{background:#f0efe8;transform:translateY(-2px)}
+.cta-band{background:var(--or);padding:5rem;display:flex;justify-content:space-between;align-items:center;gap:2rem;flex-wrap:wrap}
+.cta-band-t{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.8rem,4vw,3.2rem);letter-spacing:.03em;line-height:1;color:#fff}
+.git-float{position:fixed;bottom:2rem;right:2rem;z-index:400;background:var(--or);color:#fff;font-family:'Rajdhani',sans-serif;font-size:.8rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.85rem 1.5rem;clip-path:polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%);border:none;cursor:pointer;display:flex;align-items:center;gap:.5rem;box-shadow:0 0 28px rgba(255,77,0,.4);animation:gpulse 2.5s ease-in-out infinite}
+@keyframes gpulse{0%,100%{box-shadow:0 0 28px rgba(255,77,0,.4)}50%{box-shadow:0 0 50px rgba(255,77,0,.7)}}
+.git-float:hover{transform:translateY(-3px)}
+.modal-overlay{position:fixed;inset:0;z-index:600;background:rgba(4,4,6,.9);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;padding:1rem;opacity:0;pointer-events:none;transition:opacity .3s}
+.modal-overlay.open{opacity:1;pointer-events:all}
+.modal{background:#0D0D12;border:1px solid rgba(255,77,0,.3);width:100%;max-width:500px;position:relative;overflow:hidden;transform:translateY(30px);transition:transform .35s}
+.modal-overlay.open .modal{transform:translateY(0)}
+.modal::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--or),var(--cy))}
+.modal-head{padding:2rem 2rem 1.2rem;border-bottom:1px solid rgba(255,255,255,.06)}
+.modal-tag{font-family:'Rajdhani',sans-serif;font-size:.65rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--or);margin-bottom:.4rem}
+.modal-title{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;letter-spacing:.04em}
+.modal-close{position:absolute;top:1rem;right:1rem;background:none;border:1px solid var(--brd);color:var(--mu);width:30px;height:30px;font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:border-color .2s,color .2s}
+.modal-close:hover{border-color:var(--or);color:var(--or)}
+.modal-body{padding:1.6rem 2rem 2rem}
+.mform{display:flex;flex-direction:column;gap:1rem}
+.fg{display:flex;flex-direction:column;gap:.45rem}
+.fg label{font-family:'Rajdhani',sans-serif;font-size:.68rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mu)}
+.fg input,.fg select,.fg textarea{background:var(--bg3);border:1px solid var(--brd);color:var(--wh);font-family:'Inter',sans-serif;font-size:.85rem;padding:.85rem 1rem;outline:none;transition:border-color .2s;width:100%}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--or)}
+.mform-row{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+.modal-success{display:none;text-align:center;padding:2rem}
+.modal-success.show{display:block}
+.ms-icon{font-size:2.5rem;margin-bottom:.8rem}
+.ms-t{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:var(--or);margin-bottom:.4rem}
+.ms-d{font-size:.82rem;color:var(--mu);line-height:1.75}
+footer{background:#040406;padding:3rem 5rem;border-top:1px solid var(--brd)}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;margin-bottom:2rem;padding-bottom:2rem;border-bottom:1px solid var(--brd)}
+.footer-brand .logo{display:inline-block;margin-bottom:1rem}
+.footer-brand p{font-size:.8rem;color:var(--mu);line-height:1.8;max-width:280px}
+.footer-col h4{font-family:'Rajdhani',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--or);margin-bottom:1rem}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:.6rem}
+.footer-col ul a{font-family:'Rajdhani',sans-serif;font-size:.76rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--mu);text-decoration:none;transition:color .2s}
+.footer-col ul a:hover{color:var(--wh)}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-copy{font-family:'Rajdhani',sans-serif;font-size:.7rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--mu)}
+.footer-links{display:flex;gap:1.5rem;list-style:none}
+.footer-links a{font-family:'Rajdhani',sans-serif;font-size:.7rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--mu);text-decoration:none;transition:color .2s}
+.footer-links a:hover{color:var(--or)}
+.rv{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}.rv.vs{opacity:1;transform:none}
+@keyframes sli{from{opacity:0;transform:translateX(-30px)}to{opacity:1;transform:none}}
+@keyframes sliR{from{opacity:0;transform:translateX(40px)}to{opacity:1;transform:none}}
+@keyframes flt{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+@media(max-width:900px){
+  nav{padding:1rem 1.5rem}
+  .nav-links{display:none;position:fixed;top:60px;left:0;right:0;background:rgba(7,7,10,.98);flex-direction:column;padding:1.5rem;border-bottom:1px solid var(--brd);gap:1rem;z-index:199}
+  .nav-links.open{display:flex}
+  .hamburger{display:block}
+  section{padding:4rem 1.5rem}
+  .page-hero{padding:8rem 1.5rem 3rem}
+  .cta-band{padding:3rem 1.5rem;flex-direction:column}
+  footer{padding:2.5rem 1.5rem}
+  .footer-top{grid-template-columns:1fr 1fr;gap:2rem}
+  .footer-bottom{flex-direction:column;text-align:center}
+  .git-float{bottom:1.2rem;right:1.2rem;font-size:.72rem;padding:.7rem 1.1rem}
+  .mform-row{grid-template-columns:1fr}
+}
+
+.about-hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;padding:10rem 5rem 6rem;border-bottom:1px solid var(--brd);position:relative;overflow:hidden}
+.about-hero-bg{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 60% 80% at 80% 50%,rgba(255,77,0,.07) 0%,transparent 70%)}
+.founder-card{background:var(--bg3);border:1px solid var(--brd);overflow:hidden;max-width:320px;margin:0 auto}
+.fc-avatar{width:100%;aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:6rem;background:linear-gradient(135deg,#0D0D20,#1A0A28);border-bottom:1px solid var(--brd)}
+.fc-plate{padding:1.5rem 1.8rem;background:var(--sf)}
+.fc-name{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:.04em;line-height:1.1;margin-bottom:.3rem}
+.fc-role{font-family:'Rajdhani',sans-serif;font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--or)}
+.fc-desc{font-size:.78rem;color:var(--mu);line-height:1.7;margin-top:.6rem}
+#story{background:var(--bg2);display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:start}
+.story-body p{font-size:.88rem;line-height:1.95;color:rgba(240,238,248,.5);margin-bottom:1.3rem}
+.story-body p strong{color:var(--wh);font-weight:400}
+.story-numbers{display:flex;flex-direction:column;gap:0;border:1px solid var(--brd)}
+.sn{padding:1.8rem 2rem;border-bottom:1px solid var(--brd);transition:background .2s}
+.sn:hover{background:var(--bg3)}.sn:last-child{border-bottom:none}
+.sn-n{font-family:'Bebas Neue',sans-serif;font-size:2.5rem;color:var(--or);line-height:1;margin-bottom:.3rem}
+.sn-l{font-size:.76rem;color:var(--mu)}
+#values{background:var(--bg)}
+.vgrid{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--brd);margin-top:2.5rem}
+.vcard{padding:2.5rem 2rem;border-right:1px solid var(--brd);transition:background .2s}
+.vcard:hover{background:var(--bg3)}.vcard:last-child{border-right:none}
+.v-icon{font-size:2rem;margin-bottom:1rem}
+.v-title{font-family:'Rajdhani',sans-serif;font-size:.9rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:.6rem}
+.v-desc{font-size:.77rem;color:var(--mu);line-height:1.8}
+@media(max-width:900px){.about-hero-grid{grid-template-columns:1fr;padding:8rem 1.5rem 3rem}#story{grid-template-columns:1fr}.vgrid{grid-template-columns:1fr}.vcard{border-right:none!important;border-bottom:1px solid var(--brd)}.vcard:last-child{border-bottom:none}}
+</style>
+</head>
+<body>
+<nav id="navbar">
+  <a class="logo" href="index.html"><span>D</span>AASA</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="pricing.html">Pricing</a></li>
+    <li><a href="portfolio.html">Portfolio</a></li>
+    <li><a href="about.html" class='active'>About</a></li>
+    <li><a href="careers.html">Careers</a></li>
+    <li><a href="contact.html" class="nav-cta">Contact ▶</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger">☰</button>
+</nav>
+
+<div class="about-hero-grid">
+  <div class="about-hero-bg"></div>
+  <div style="opacity:0;animation:sli .5s ease .1s forwards">
+    <p class="lbl">The Studio</p>
+    <h1 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(3rem,7vw,6.5rem);letter-spacing:.02em;line-height:.9;margin-bottom:1.5rem">BUILT IN<br>BENGALURU.<br>FOR SOUTH INDIA.</h1>
+    <p style="font-size:.9rem;line-height:1.9;color:rgba(240,238,248,.5);margin-bottom:1.5rem">Daasa was built from a frustration anyone in South India's creator economy will recognise — brilliant ideas, zero professional support. We built the studio that should have existed years ago.</p>
+    <div style="display:flex;gap:.5rem;flex-wrap:wrap">
+      <span style="border:1px solid var(--brd);padding:.3rem .8rem;font-family:'Rajdhani',sans-serif;font-size:.7rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--mu)">Bengaluru</span>
+      <span style="border:1px solid var(--brd);padding:.3rem .8rem;font-family:'Rajdhani',sans-serif;font-size:.7rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--mu)">AI-Powered</span>
+      <span style="border:1px solid var(--brd);padding:.3rem .8rem;font-family:'Rajdhani',sans-serif;font-size:.7rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--mu)">Vernacular-First</span>
+    </div>
+  </div>
+  <div style="opacity:0;animation:sliR .7s ease .3s forwards">
+    <div class="founder-card">
+      <div class="fc-avatar">👤</div>
+      <div class="fc-plate">
+        <div class="fc-name">Durgaprasad Karunadu</div>
+        <div class="fc-role">// Founder &amp; CEO</div>
+        <p class="fc-desc">Visionary behind Daasa. Strategy, client relations, and driving the future of vernacular content in South India.</p>
+      </div>
+    </div>
+  </div>
+</div>
+<section id="story">
+  <div class="rv">
+    <p class="lbl">Our Story</p>
+    <h2 class="stit">WHY DAASA EXISTS.</h2>
+    <div class="story-body">
+      <p>South India has <strong>600 million+ vernacular language speakers</strong>. Kannada. Tamil. Telugu. Brilliant creators, emerging brands, and growing businesses — all producing content. Almost none of them had access to a studio that truly understood their language, culture, and ambitions.</p>
+      <p>Durgaprasad Karunadu saw this gap firsthand. The existing options were expensive agencies that treated vernacular content as an afterthought, or individual freelancers with no reliability or consistency.</p>
+      <p>Daasa was the answer: <strong>a full-stack content studio built natively for South India</strong>, using AI to bring down cost without compromising quality, staffed by people who live and breathe Kannada, Tamil, and Telugu content.</p>
+      <p>We launched in Bengaluru in 2026. Broadcast contracts. Startup subscriptions. Creator partnerships. Every project teaches us something. We're just getting started.</p>
+    </div>
+  </div>
+  <div class="rv">
+    <div class="story-numbers">
+      <div class="sn"><div class="sn-n">2026</div><div class="sn-l">Founded in Bengaluru, Karnataka</div></div>
+      <div class="sn"><div class="sn-n">8+</div><div class="sn-l">Services across the content lifecycle</div></div>
+      <div class="sn"><div class="sn-n">3</div><div class="sn-l">Languages: Kannada, Tamil, Telugu</div></div>
+      <div class="sn"><div class="sn-n">3</div><div class="sn-l">Broadcast channel contracts signed</div></div>
+    </div>
+  </div>
+</section>
+<section id="values">
+  <div class="rv"><p class="lbl">What We Stand For</p><h2 class="stit">OUR VALUES.</h2></div>
+  <div class="vgrid rv">
+    <div class="vcard"><div class="v-icon">⚡</div><div class="v-title">AI-First, Human-Checked</div><p class="v-desc">We use AI to work faster and smarter, but every deliverable is reviewed by a human who cares about the craft. Speed doesn't mean shortcuts.</p></div>
+    <div class="vcard"><div class="v-icon">🗣️</div><div class="v-title">Vernacular is the Default</div><p class="v-desc">We don't translate. We originate. Our scripts, sensibility, and cultural reference points start in Kannada, Tamil, and Telugu.</p></div>
+    <div class="vcard"><div class="v-icon">🤝</div><div class="v-title">Clients as Partners</div><p class="v-desc">Your content goals are ours. We take ownership of outcomes, not just deliverables. If something isn't working, we say so and fix it.</p></div>
+  </div>
+</section>
+<div class="cta-band">
+  <div class="cta-band-t">JOIN THE DAASA NETWORK.</div>
+  <a href="contact.html" class="btn btn-dark">Work With Us ▶</a>
+</div>
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand"><a class="logo" href="index.html"><span>D</span>AASA</a><p>Full-stack AI-powered content studio. Scripts, shoots, edits, social, and websites — all under one roof in Bengaluru.</p></div>
+    <div class="footer-col"><h4>Pages</h4><ul><li><a href="services.html">Services</a></li><li><a href="pricing.html">Pricing</a></li><li><a href="portfolio.html">Portfolio</a></li><li><a href="about.html">About</a></li><li><a href="careers.html">Careers</a></li></ul></div>
+    <div class="footer-col"><h4>Services</h4><ul><li><a href="services.html">Video Production</a></li><li><a href="services.html">Post-Production</a></li><li><a href="services.html">Social Media</a></li><li><a href="services.html">Vernacular</a></li><li><a href="services.html">Broadcast</a></li></ul></div>
+    <div class="footer-col"><h4>Contact</h4><ul><li><a href="mailto:hello@daasa.in">hello@daasa.in</a></li><li><a href="contact.html">Get In Touch</a></li><li><a href="careers.html">Join The Team</a></li></ul></div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2026 Daasa Studio · Bengaluru, India</p>
+    <ul class="footer-links"><li><a href="contact.html">Contact</a></li><li><a href="careers.html">Careers</a></li><li><a href="pricing.html">Pricing</a></li></ul>
+  </div>
+</footer>
+<button class="git-float" onclick="openModal()">💬 Get In Touch</button>
+<div class="modal-overlay" id="modalOverlay" onclick="closeModalOut(event)">
+  <div class="modal">
+    <div class="modal-head"><div class="modal-tag">// Let's Talk</div><div class="modal-title">GET IN TOUCH</div><button class="modal-close" onclick="closeModal()">✕</button></div>
+    <div class="modal-body">
+      <form class="mform" id="gitForm">
+        <div class="mform-row">
+          <div class="fg"><label>Full Name *</label><input type="text" placeholder="Rahul Sharma" required></div>
+          <div class="fg"><label>Phone Number *</label><input type="tel" placeholder="+91 98765 43210" required></div>
+        </div>
+        <div class="fg"><label>Email Address *</label><input type="email" placeholder="you@example.com" required></div>
+        <div class="fg"><label>Brand / Company Name</label><input type="text" placeholder="Acme Corp / @yourchannel"></div>
+        <button type="submit" class="btn btn-f" style="width:100%;justify-content:center;margin-top:.5rem">Send Message ▶</button>
+      </form>
+      <div class="modal-success" id="modalSuccess"><div class="ms-icon">⚡</div><div class="ms-t">MESSAGE SENT!</div><p class="ms-d">Thanks! Daasa will contact you within 24 hours.</p></div>
+    </div>
+  </div>
+</div>
+<script>
+function toggleNav(){document.getElementById('navLinks').classList.toggle('open')}
+document.getElementById('hamburger').onclick=toggleNav;
+window.addEventListener('scroll',()=>{const n=document.getElementById('navbar');if(n)n.style.padding=window.scrollY>60?'0.7rem 5rem':'1.1rem 5rem';});
+const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('vs');}),{threshold:.08});
+document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
+function openModal(){document.getElementById('modalOverlay').classList.add('open');document.body.style.overflow='hidden';}
+function closeModal(){document.getElementById('modalOverlay').classList.remove('open');document.body.style.overflow='';}
+function closeModalOut(e){if(e.target===document.getElementById('modalOverlay'))closeModal();}
+const gf=document.getElementById('gitForm');if(gf)gf.addEventListener('submit',function(e){e.preventDefault();this.style.display='none';document.getElementById('modalSuccess').classList.add('show');setTimeout(()=>{closeModal();this.style.display='flex';document.getElementById('modalSuccess').classList.remove('show');this.reset();},2800);});
+function toggleFaq(btn){const a=btn.nextElementSibling;const isOpen=a.classList.contains('open');document.querySelectorAll('.faq-q').forEach(b=>{b.classList.remove('open');b.nextElementSibling.classList.remove('open');});if(!isOpen){btn.classList.add('open');a.classList.add('open');}}
+</script>
+</body></html>
